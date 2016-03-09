@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>FlowerDelivery</display-name>
+  <servlet>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>servlets.AdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/AdminServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>StartServlet</servlet-name>
+    <servlet-class>servlets.StartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>StartServlet</servlet-name>
+  	<url-pattern>/start</url-pattern>
+  	    <url-pattern>/HelloOne</url-pattern>
+    <url-pattern>/HelloTwo</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>hello.jsp</welcome-file>
+    <welcome-file>admin.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
