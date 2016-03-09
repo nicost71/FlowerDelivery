@@ -1,23 +1,19 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import Instances.Administrator;
 import database.DBConnection;
 
 /**
  * Servlet implementation class Admin
+ * 
+ * Description: get Admin info from login form, and check with database whether it's correct or not.
+ * 
+ * 
  */
 @WebServlet("/Admin")
 public class AdminServlet extends HttpServlet {
@@ -52,18 +48,21 @@ public class AdminServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			DBConnection dbConnection = new DBConnection();
 			dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
-			int ok = checkAdmin(dbConnection, userID, password);
+			int loginStatus = checkAdmin(dbConnection, userID, password);
+			
+			
 			
 			dbConnection.closeDB();
 		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
+		
 		/*ArrayList<Integer> list = new ArrayList<Integer>();
 		list.addAll(Arrays.asList(0,1,2,3));
 		RequestDispatcher rd = request.getRequestDispatcher("/admin.jsp");  
-		request.setAttribute("test",list);//存值  
-		rd.forward(request,response);//开始跳转 */	
+		request.setAttribute("test",list);//store value  
+		rd.forward(request,response);//start directing */	
 	}
 	private int checkAdmin(DBConnection dbConnection, int userID, String password) throws Exception
 	{
