@@ -44,8 +44,6 @@ public class FlowerServlet extends HttpServlet {
 			
 			dbConnection.closeDB();
 			request.setAttribute("flowersList", flowers);
-			request.setAttribute("message", "hellloooo");
-			System.out.println("asdfasfdasdf");
 			request.getRequestDispatcher("start.jsp").forward(request,response);
 		} catch (Exception e)
 		{
@@ -74,7 +72,7 @@ public class FlowerServlet extends HttpServlet {
 		}
 	}
 	
-	public static ArrayList<Flower> getFlowers() throws Exception{
+	public static ArrayList<Flower> getCurrentFlowers() throws Exception{
 		try
 		{
 			DBConnection dbConnection = new DBConnection();

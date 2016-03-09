@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Flower Delivery</title>
 </head>
-<body onload="<%ArrayList<Flower> flowers = FlowerServlet.getFlowers();%>">
+<body onload="<%ArrayList<Flower> flowers = FlowerServlet.getCurrentFlowers();%>">
 
 <form  action="FlowerServlet" method="get">
 <h1>Current Flowers</h1>
@@ -26,9 +26,14 @@
 
     </table> 
 </form>
-<form  action="StartServlet" method="post">
-<input type="submit" value="Order Flower"><input type="hidden" name="action" value="booking">
+<form  action="StartServlet" method="get">
+<input type="hidden" name="action" value="order">
+<input type="submit" value="Order Flower">
+</form>
+<form  action="StartServlet" method="get">
+<input type="hidden" name="action" value="booking">
 <input type="submit" value="Manage Booking">
 </form>
+
 </body>
 </html>

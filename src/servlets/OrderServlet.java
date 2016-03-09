@@ -52,7 +52,7 @@ public class OrderServlet extends HttpServlet
 			DBConnection dbConnection = new DBConnection();
 			dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
 
-			String url = request.getServletPath();
+			String url = request.getParameter("requestType");
 			System.out.println(url);
 			
 			if (url.contains("userCheckOrder"))
@@ -64,12 +64,20 @@ public class OrderServlet extends HttpServlet
 				{
 					ArrayList<Order> orders = userCheckOrder(dbConnection, userPhoneNum);
 					// to pass orders to jsp
+					
+					request.setAttribute("orders", orders);
+				} else{
+					request.setAttribute("orders", new ArrayList<Order>());
 				}
+				request.getRequestDispatcher("manageBooking.jsp").forward(request,response);
+
+				
 			} else if (url.contains("placeOrder"))
 			{
 				
 				String userPhoneNum = request.getParameter("userPhoneNum");
 				String password = request.getParameter("password");
+				System.out.println("userPhoneNum: "+ userPhoneNum);
 				int ok = checkUser(dbConnection, userPhoneNum, password);
 				if (ok==0)
 				{
@@ -85,14 +93,20 @@ public class OrderServlet extends HttpServlet
 					placeOrder(dbConnection, order);
 				}
 				
-				
+				response.sendRedirect("start.jsp");
+
 			} else if (url.contains("adminCheckOrder"))
 			{
 				ArrayList<Order> orders = adminCheckOrder(dbConnection);
-				// to pass orders to jsp
+				// to pass orders to js
+				response.sendRedirect("start.jsp");
+			}
+			else{
+				response.sendRedirect("start.jsp");
 			}
 
 			dbConnection.closeDB();
+			return;
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -115,7 +129,8 @@ public class OrderServlet extends HttpServlet
 	}
 	private void placeOrder(DBConnection dbConnection, Order order)
 	{
-		dbConnection.update("insert into users orders(" + order.getOrderID() + ",'" + order.getNextDeliveryDay() + 
+		long id = System.currentTimeMillis();
+		dbConnection.update("insert into orders values(" + id + ",'" + order.getNextDeliveryDay() + 
 				"'," + order.getReceivePeriod() +"," + order.getTimesLeft() +",'" + order.getFlowers() +
 				"','" + order.getUserPhoneNum() +"','" + order.getReceiverName() +"','" + order.getReceiverAddr() +
 				"','" + order.getReceiverPhone() +"')");
@@ -124,30 +139,36 @@ public class OrderServlet extends HttpServlet
 	private ArrayList<Order> userCheckOrder(DBConnection dbConnection, String userPhoneNum) throws Exception
 	{
 		ArrayList<Order> orders = new ArrayList<>();
-		String sql = "select * from orders where userPhoneNum=" + userPhoneNum;
-		dbConnection.rs = dbConnection.query(sql);
-		while (dbConnection.rs.next())
-		{
-			Order order = createOrder(dbConnection.rs);
-			orders.add(order);
+		if(!userPhoneNum.isEmpty()){
+			String sql = "select * from orders where userPhoneNum=" + userPhoneNum;
+			dbConnection.rs = dbConnection.query(sql);
+			while (dbConnection.rs.next())
+			{
+				Order order = createOrder(dbConnection.rs);
+				orders.add(order);
+			}
 		}
 		return orders;
 	}
 
 	private int checkUser(DBConnection dbConnection, String userPhoneNum, String password) throws Exception
 	{
-		String sql = "select * from users where userPhoneNum=" + userPhoneNum;
-		dbConnection.rs = dbConnection.query(sql);
-		int ok;
-		// ok = 1: this user information is correct;
-		// ok = 0: new user;
-		// ok = -1: this user information is incorrect
-		if (dbConnection.rs.wasNull())
-			ok = 0;
-		else if (dbConnection.rs.getString(2).equals(password))
-			ok = 1;
-		else
-			ok = -1;
+		int ok = -1;
+		if(!userPhoneNum.isEmpty()){
+			String sql = "select * from users where userPhoneNum =" + userPhoneNum;
+			System.out.println("Query: "+sql);
+			dbConnection.rs = dbConnection.query(sql);
+			// ok = 1: this user information is correct;
+			// ok = 0: new user;
+			// ok = -1: this user information is incorrect
+			if (!dbConnection.rs.next()){
+				ok = 0;
+			}
+			else if (dbConnection.rs.getString(2).equals(password)){
+				ok = 1;
+			}
+		}
+		System.out.println("OK "+ok);
 		return ok;
 	}
 
@@ -158,11 +179,11 @@ public class OrderServlet extends HttpServlet
 		String receiverName = request.getParameter("receiverName");
 		String receiverAddr = request.getParameter("receiverAddr");
 		String receiverPhone = request.getParameter("receiverPhone");
-		String flowers = request.getParameter("flowers");
-		String date = request.getParameter("date");
-		int receivePeriod = Integer.parseInt(request.getParameter("receivePeriod"));
-		int timesLeft = Integer.parseInt(request.getParameter("timesLeft"));
-		Order order = new Order(userPhoneNum, password, receiverName, receiverAddr, receiverPhone, flowers, date,
+		String flowers = String.join(", ", request.getParameterValues("checkedFlowers"));
+		String deliveryDay = request.getParameter("deliveryDay");
+		int receivePeriod = 11;//Integer.parseInt(request.getParameter("receivePeriod"));
+		int timesLeft = 3;//After order has created, 3 orders left. Integer.parseInt(request.getParameter("timesLeft"));
+		Order order = new Order(userPhoneNum, password, receiverName, receiverAddr, receiverPhone, flowers, deliveryDay,
 				receivePeriod, timesLeft);
 		return order;
 	}
@@ -170,7 +191,7 @@ public class OrderServlet extends HttpServlet
 	private Order createOrder(ResultSet rs) throws Exception
 	{
 
-		int orderID = rs.getInt(1);
+		long orderID = rs.getLong(1);
 		String nextDeliveryDay = rs.getString(2);
 		int receivePeriod = rs.getInt(3);
 		int timesLeft = rs.getInt(4);

@@ -7,7 +7,7 @@ public class Order
 {
 	static int cnt = 1;
 	static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
-	private int orderID;
+	private long orderID;
 	private String userPhoneNum;
 	private String password;
 	private String receiverName;
@@ -41,7 +41,7 @@ public class Order
 		this.timesLeft = timesLeft;
 	}
 
-	public int getOrderID()
+	public long getOrderID()
 	{
 		return orderID;
 	}
@@ -86,7 +86,7 @@ public class Order
 		return timesLeft;
 	}
 
-	public void setOrderID(int orderID)
+	public void setOrderID(long orderID)
 	{
 		this.orderID = orderID;
 	}
