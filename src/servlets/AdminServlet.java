@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,21 +50,26 @@ public class AdminServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			DBConnection dbConnection = new DBConnection();
 			dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
-			int loginStatus = checkAdmin(dbConnection, userID, password);
 			
+			Integer loginStatus = new Integer(checkAdmin(dbConnection, userID, password));
+			//System.out.println(loginStatus);
+			RequestDispatcher rd = request.getRequestDispatcher("/admin.jsp");  
+			request.setAttribute("loginStatus",loginStatus);//store value  
 			
+			rd.forward(request,response);//start directing 
 			
 			dbConnection.closeDB();
+			
 		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
 		
 		/*ArrayList<Integer> list = new ArrayList<Integer>();
-		list.addAll(Arrays.asList(0,1,2,3));
-		RequestDispatcher rd = request.getRequestDispatcher("/admin.jsp");  
-		request.setAttribute("test",list);//store value  
-		rd.forward(request,response);//start directing */	
+		list.addAll(Arrays.asList(0,1,2,3));*/
+		
+		
+		
 	}
 	private int checkAdmin(DBConnection dbConnection, int userID, String password) throws Exception
 	{
@@ -74,10 +81,13 @@ public class AdminServlet extends HttpServlet {
 		// ok = -1: this user information is incorrect
 		if (dbConnection.rs.wasNull())
 			ok = 0;
-		else if (dbConnection.rs.getString(2).equals(password))
-			ok = 1;
-		else
-			ok = -1;
+		else{
+			dbConnection.rs.next();
+			if (dbConnection.rs.getString(2).equals(password))
+				ok = 1;
+			else
+				ok = -1;
+		}
 		return ok;
 	}
 }
