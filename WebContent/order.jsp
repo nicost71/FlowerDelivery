@@ -99,7 +99,7 @@
 					%>
 					<div class="panel panel-default panel-horizontal">
 						<div class="panel-heading">
-							<input type="checkbox" name="checkedFlowers" style="width: 100%"
+							<input type="checkbox" name="checkedFlowers" style="width: 100%; height: 25px;"
 								value="<%=flowers.get(i).getFlowerName()%>" checked>
 						</div>
 						<div class="panel-body">

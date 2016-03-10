@@ -16,7 +16,7 @@
 	onload="<%ArrayList<Flower> flowers = FlowerServlet.getCurrentFlowers();%>">
 	<div class="container">
 	
-		<div class="jumbotron text-center">
+		<div class="jumbotron text-center" style="background-color: rgba(255,255,255,0.4)">
 			<h1>Flower Delivery</h1>
 		</div>
 		<div class="row" style="display: table; width: 100%;">
@@ -31,7 +31,7 @@
 				%>
 
 				<div class="panel panel-default panel-horizontal">
-					<div class="panel-heading">
+					<div class="panel-heading panel-fixed-length">
 						<h3 class="panel-title"><%=flowers.get(i).getFlowerName()%></h3>
 					</div>
 					<div class="panel-body">

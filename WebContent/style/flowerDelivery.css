@@ -1,5 +1,8 @@
 @CHARSET "ISO-8859-1";
 
+body{
+	background-image: url(/FlowerDelivery/assets/bg.jpg)
+}
 
 .voffset30{
 	margin-top: 30px;
@@ -9,6 +12,10 @@
 	margin-top: 50px;
 }
 
+.row{
+	margin-right: 0px;
+	margin-left: 0px;
+}
 .login-container{
 	width: 200px;
     vertical-align: middle;
@@ -22,9 +29,14 @@
 
 .booking-table {
     margin-top: 15px;
+    background-color: transparent;
+    border-color: transparent;
 }
 .booking-table .panel-heading .pull-right {
     margin-top: -20px;
+}
+.booking-table .booking-table-header{
+	background-color: rgba(255,255,255,0.6);
 }
 .booking-table .booking-table-header input[disabled] {
     background-color: transparent;
@@ -44,7 +56,10 @@
     color: #333;
 }
 
-.rowColor{
+.rowColor-current{
+	background-color: rgba(255,255,255,0.4);
+}
+.rowColor-old{
 	background-color: rgba(0,0,0,0.2);
 }
 
@@ -127,11 +142,33 @@
 	font-size: 18px;
 	font-weight: bold;
 }
-.panel.panel-default.panel-horizontal > .panel-heading{
+.panel-fixed-length{
 	min-width: 200px;
 	max-width: 200px;
 	overflow: hidden;
 }
+.panel.panel-default.panel-horizontal, .navbar-default{
+	background-color: rgba(255,255,255,0.4);
+	border-color: rgba(255,255,255,0.4);
+}
+.panel.panel-default{
+	border-color: rgba(255,255,255,0.4);
+}
+.panel.panel-default.panel-horizontal > .panel-heading{
+		background-color: rgba(255,255,255,0.4);
+}
+
+.btn, .btn-primary{
+	background-color: rgba(255,255,255,0.8);
+	border-color: rgba(255,255,255,0.8);
+	color: rgba(0,0,0,0.8);
+}
+.btn:hover, .btn-primary:hover{
+	background-color: rgba(255,255,255,0.3);
+	border-color: rgba(255,255,255,0.3);
+		color: rgba(0,0,0,0.8);
+}
+
 
 
 /*input[type=text] {padding:5px; border:2px solid #ccc; 
