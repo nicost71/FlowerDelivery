@@ -15,18 +15,8 @@
 	onload="<%ArrayList<Flower> flowers = FlowerServlet.getCurrentFlowers();%>">
 	<div class="container">
 
-		<nav class="navbar navbar-default" style="margin-bottom: 40px">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="start.jsp"> <img alt="Brand"
-					src="assets/icons/home.png" style="max-width: 20px">
-				</a> <span class="navbar-brand"
-					style="border-left: 1px solid rgba(0, 0, 0, 0.2); margin-left: 0px; font-size: 15px">
-					New Order </span>
-			</div>
-		</div>
-		</nav>
-
+		<a href="start.jsp"><img src="Icons/home.png" width=20px
+			height="20px"></a>
 		<h2>Create new order</h2>
 
 		<div class="row voffset50">
@@ -38,82 +28,72 @@
 				<div class="col-md-5">
 					<div class="form-group">
 						<label>Phone Nr:</label> <input type="text" name="userPhoneNum"
-							class="form-control text-center" required>
+							class="form-control text-center" placeholder="Phone-Nr." required>
 					</div>
 					<div class="form-group">
 						<label>Password:</label> <input type="password" name="password"
-							class="form-control text-center" required>
+							class="form-control text-center" placeholder="Password" required>
 					</div>
 					<div class="form-group">
 						<label>Delivery Address:</label> <input type="text"
-							name="receiverAddr" class="form-control text-center" required>
+							name="receiverAddr" class="form-control text-center"
+							placeholder="Delivery Address" required>
 					</div>
 					<div class="form-group">
 						<label>Reciever Name:</label> <input type="text"
-							name="receiverName" class="form-control text-center" required>
+							name="receiverName" class="form-control text-center"
+							placeholder="Reciever Name" required>
 					</div>
 					<div class="form-group">
 						<label>Reciever Phone:</label> <input type="text"
-							name="receiverPhone" class="form-control text-center" required>
+							name="receiverPhone" class="form-control text-center"
+							placeholder="Reciever Phone" required>
 					</div>
 
-					<div class="row">
-
-						<div class="col-md-6">
-
-
-							<div class="form-group">
-								<label>Day of Delivery:</label> <br> <label
-									class="radio-inline" style="margin-top: 5px;"><input
-									type="radio" name="deliveryDay" value="Monday" checked>Monday</label>
-								<label class="radio-inline" style="margin-top: 5px;"><input
-									type="radio" name="deliveryDay" value="Saturday">Saturday</label>
-
-							</div>
-						</div>
-						<div class="col-md-6">
-
-							<div class="form-group">
-								<label>Time of Delivery:</label> <br> <label> <select
-									class="btn btn-default" name="receivePeriod">
-										<option value="8">8am</option>
-										<option value="10">10am</option>
-										<option value="12">12pm</option>
-										<option value="14">2pm</option>
-										<option value="16">4pm</option>
-										<option value="18">6pm</option>
-								</select></label>
-							</div>
-						</div>
-
+					<div class="form-group">
+						<label>Day of Delivery:</label>
+						<br>
+						<label class="radio-inline"><input type="radio"
+							name="deliveryDay" value="monday" checked>Monday</label> <label
+							class="radio-inline"><input type="radio"
+							name="deliveryDay" value="saturday">Saturday</label>
 
 					</div>
-
-
+					<div class="form-group">
+						<label>Receive Period:</label> <select name="receivePeriod">
+							<option value="10 a.m">10 a.m</option>
+							<option value="11 a.m">11 a.m</option>
+							<option value="12 p.m">12 p.m</option>
+							<option value="13 p.m">13 p.m</option>
+							<option value="14 p.m">14 p.m</option>
+							<option value="15 p.m">15 p.m</option>
+							<option value="16 p.m">16 p.m</option>
+							<option value="17 p.m">17 p.m</option>
+							<option value="18 p.m">18 p.m</option>
+						</select> 
+					</div>
 				</div>
 
 				<div class="col-md-5 col-md-offset-2">
 					<%
-						if (flowers != null) {
-							for (int i = 0; i < flowers.size(); i += 1) {
+						if (flowers != null)
+						{
+							for (int i = 0; i < flowers.size(); i += 1)
+							{
 					%>
-					<div class="panel panel-default panel-horizontal">
-						<div class="panel-heading">
-							<input type="checkbox" name="checkedFlowers" style="width: 100%; height: 25px;"
+					<div class="row row-eq-height " style="margin-top: 15px">
+
+						<div class="col-md-3 row-eq-height ">
+							<img src="<%=flowers.get(i).getImageLink()%>" width=100px
+								height="100px">
+						</div>
+						<div class="col-md-3 row-eq-height ">
+							<h4><%=flowers.get(i).getFlowerName()%></h4>
+						</div>
+						<div class="col-md-6 row-eq-height ">
+							<input type="checkbox" name="checkedFlowers"
 								value="<%=flowers.get(i).getFlowerName()%>" checked>
 						</div>
-						<div class="panel-body">
-							<div class="text-center">
-								<img src="assets/<%=flowers.get(i).getImageLink()%>" width=75px
-									height="75px">
-							</div>
-
-						</div>
-						<div class="panel-footer" style="width: 100%;">
-							<h3 class="panel-title"><%=flowers.get(i).getFlowerName()%></h3>
-
-						</div>
-
 					</div>
 					<%
 						}
@@ -124,8 +104,8 @@
 
 				</div>
 
-				<input type="submit" class="btn btn-primary voffset50"
-					style="font-size: 18px" value="Submit Order">
+
+				<input type="submit" class="btn btn-primary" value="Submit Order">
 			</form>
 
 		</div>
