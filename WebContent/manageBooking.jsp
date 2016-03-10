@@ -12,28 +12,45 @@
 </head>
 <body>
 	<div class="container">
-		<a href="start.jsp"><img src="Icons/home.png" width=20px
-			height="20px"></a>
+		<nav class="navbar navbar-default" style="margin-bottom: 40px">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="start.jsp"> <img alt="Brand"
+					src="assets/icons/home.png" style="max-width: 20px">
+				</a> <span class="navbar-brand"
+					style="border-left: 1px solid rgba(0, 0, 0, 0.2); margin-left: 0px; font-size: 15px">
+					Manage Booking </span>
+			</div>
+		</div>
+		</nav>
 		<h2 class="text-center">Manage Booking</h2>
 		<%
 			ArrayList<Order> orders = (ArrayList<Order>) request.getAttribute("orders");
 			if (orders == null || orders.size() == 0) {
 		%>
 		<div class="login-container">
+
 			<form action="OrderServlet" method="POST">
 				<input type="hidden" name="requestType" value="userCheckOrder">
-				<div class="form-group">
-					<label>Phone Nr:</label> <input type="text" name="userPhoneNum"
-						class="form-control text-center" placeholder="Phone-Nr." required>
-					<div class="form-group">
-						<label>Password:</label> <input type="password" name="password"
-							class="form-control text-center" placeholder="Password" required>
-					</div>
+
+
+				<div class="input-group" style="margin-bottom: 10px">
+					<span class="input-group-addon"><i
+						class="custom-icon icon-person small"></i></span> <input type="text"
+						class="form-control" name="userPhoneNum"
+						placeholder="Phone Number">
 				</div>
-				<div class="text-center">
-								<input type="submit" class="btn btn-primary" value="Check Order">
-				
+
+				<div class="input-group" style="margin-bottom: 10px">
+					<span class="input-group-addon"><i
+						class="custom-icon icon-lock small"></i></span> <input type="password"
+						class="form-control" name="password" placeholder="Password">
 				</div>
+
+				<div class="text-center voffset30">
+					<input type="submit" class="btn btn-primary" value="Check Order">
+				</div>
+
 			</form>
 		</div>
 
@@ -45,36 +62,51 @@
 		<%
 			} else if (orders != null) {
 		%>
-		<div class="table-container">
-		
-		
-		<table border="1">
-			<thead>
-				<tr>
-					<th>Flowers</th>
-					<th>Reciever Name</th>
-					<th>Reciever Address</th>
-					<th>Reciever Phone</th>
-					<th>Next Delivery Day</th>
-				</tr>
-			</thead>
-			<%
-				for (int i = 0; i < orders.size(); i += 1) {
-			%>
-			<tr>
-				<td><%=orders.get(i).getFlowers()%></td>
-				<td><%=orders.get(i).getReceiverName()%></td>
-				<td><%=orders.get(i).getReceiverAddr()%></td>
-				<td><%=orders.get(i).getReceiverPhone()%></td>
-				<td><%=orders.get(i).getNextDeliveryDay()%></td>
 
-			</tr>
-			<%
-				}
-			%>
 
-		</table>
+		<div class="row">
+			<div class="panel panel-primary booking-table">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Bookings for "<%=orders.get(0).getUserPhoneNum()%>"
+					</h3>
+				</div>
+				<table class="table">
+					<thead>
+						<tr class="booking-table-header">
+							<th><input type="text" class="form-control"
+								placeholder="Flowers" disabled></th>
+							<th><input type="text" class="form-control"
+								placeholder="Receiver Name" disabled></th>
+							<th><input type="text" class="form-control"
+								placeholder="Reveiver Address" disabled></th>
+							<th><input type="text" class="form-control"
+								placeholder="Receiver Phone" disabled></th>
+							<th><input type="text" class="form-control"
+								placeholder="Next Delivery Day" disabled></th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							for (int i = 0; i < orders.size(); i += 1) {
+						%>
+						<tr class="${orders.get(i).getTimesLeft() <= 0 ? 'rowColor' : ''}">
+							<td><%=orders.get(i).getFlowers()%></td>
+							<td><%=orders.get(i).getReceiverName()%></td>
+							<td><%=orders.get(i).getReceiverAddr()%></td>
+							<td><%=orders.get(i).getReceiverPhone()%></td>
+							<td><%=orders.get(i).getNextDeliveryDay()%></td>
+
+						</tr>
+						<%
+							}
+						%>
+					</tbody>
+				</table>
+			</div>
 		</div>
+
+
 		<%
 			}
 		%>

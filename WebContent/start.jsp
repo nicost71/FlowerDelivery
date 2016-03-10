@@ -15,6 +15,7 @@
 <body
 	onload="<%ArrayList<Flower> flowers = FlowerServlet.getCurrentFlowers();%>">
 	<div class="container">
+	
 		<div class="jumbotron text-center">
 			<h1>Flower Delivery</h1>
 		</div>
@@ -28,18 +29,16 @@
 					if (flowers != null) {
 						for (int i = 0; i < flowers.size(); i += 1) {
 				%>
-				<div class="row row-eq-height " style="margin-top: 15px">
 
-					<div class="col-md-3 row-eq-height ">
-						<img src="<%=flowers.get(i).getImageLink()%>" width=100px
+				<div class="panel panel-default panel-horizontal">
+					<div class="panel-heading">
+						<h3 class="panel-title"><%=flowers.get(i).getFlowerName()%></h3>
+					</div>
+					<div class="panel-body">
+						<img src="assets/<%=flowers.get(i).getImageLink()%>" width=100px
 							height="100px">
 					</div>
-					<div class="col-md-3 row-eq-height ">
-						<h4><%=flowers.get(i).getFlowerName()%></h4>
-					</div>
-					<div class="col-md-6 row-eq-height ">
-						<h4><%=flowers.get(i).getDescription()%></h4>
-					</div>
+					<div class="panel-body-right"><%=flowers.get(i).getDescription()%></div>
 				</div>
 				<%
 					}
