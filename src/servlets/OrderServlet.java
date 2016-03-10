@@ -58,6 +58,7 @@ public class OrderServlet extends HttpServlet
 			if (url.contains("userCheckOrder"))
 			{
 				String userPhoneNum = request.getParameter("userPhoneNum");
+				userPhoneNum = removeSpace(userPhoneNum);
 				String password = request.getParameter("password");
 				int ok = checkUser(dbConnection, userPhoneNum, password);
 				if (ok==1)
@@ -76,6 +77,7 @@ public class OrderServlet extends HttpServlet
 			{
 				
 				String userPhoneNum = request.getParameter("userPhoneNum");
+				userPhoneNum = removeSpace(userPhoneNum);
 				String password = request.getParameter("password");
 				System.out.println("userPhoneNum: "+ userPhoneNum);
 				int ok = checkUser(dbConnection, userPhoneNum, password);
@@ -114,6 +116,16 @@ public class OrderServlet extends HttpServlet
 
 	}
 
+	static String removeSpace(String x)
+	{
+		String[] phones = x.trim().split(" ");
+		String userPhoneNum = "";
+		for(int i=0;i<phones.length;i++)
+			userPhoneNum+=phones[i];
+		
+		return userPhoneNum;
+	}
+	
 	private ArrayList<Order> adminCheckOrder(DBConnection dbConnection) throws Exception
 	{
 		ArrayList<Order> orders = new ArrayList<>();
@@ -131,7 +143,7 @@ public class OrderServlet extends HttpServlet
 	{
 		long id = System.currentTimeMillis();
 		dbConnection.update("insert into orders values(" + id + ",'" + order.getNextDeliveryDay() + 
-				"'," + order.getReceivePeriod() +"," + order.getTimesLeft() +",'" + order.getFlowers() +
+				"','" + order.getReceivePeriod() +"'," + order.getTimesLeft() +",'" + order.getFlowers() +
 				"','" + order.getUserPhoneNum() +"','" + order.getReceiverName() +"','" + order.getReceiverAddr() +
 				"','" + order.getReceiverPhone() +"')");
 	}
@@ -175,13 +187,14 @@ public class OrderServlet extends HttpServlet
 	private Order createOrder(HttpServletRequest request)
 	{
 		String userPhoneNum = request.getParameter("userPhoneNum");
+		userPhoneNum = removeSpace(userPhoneNum);
 		String password = request.getParameter("password");
 		String receiverName = request.getParameter("receiverName");
 		String receiverAddr = request.getParameter("receiverAddr");
 		String receiverPhone = request.getParameter("receiverPhone");
 		String flowers = String.join(", ", request.getParameterValues("checkedFlowers"));
 		String deliveryDay = request.getParameter("deliveryDay");
-		int receivePeriod = Integer.parseInt(request.getParameter("receivePeriod"));
+		String receivePeriod = request.getParameter("receivePeriod");
 		int timesLeft = 3;//After order has created, 3 orders left. Integer.parseInt(request.getParameter("timesLeft"));
 		Order order = new Order(userPhoneNum, password, receiverName, receiverAddr, receiverPhone, flowers, deliveryDay,
 				receivePeriod, timesLeft);
@@ -193,7 +206,7 @@ public class OrderServlet extends HttpServlet
 
 		long orderID = rs.getLong(1);
 		String nextDeliveryDay = rs.getString(2);
-		int receivePeriod = rs.getInt(3);
+		String receivePeriod = rs.getString(3);
 		int timesLeft = rs.getInt(4);
 		String flowers = rs.getString(5);
 		String userPhoneNum = rs.getString(6);
