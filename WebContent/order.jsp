@@ -57,14 +57,39 @@
 							name="receiverPhone" class="form-control text-center" required>
 					</div>
 
-					<div class="form-group">
-						<label>Day of Delivery:</label> <br> <label
-							class="radio-inline"><input type="radio"
-							name="deliveryDay" value="monday" checked>Monday</label> <label
-							class="radio-inline"><input type="radio"
-							name="deliveryDay" value="saturday">Saturday</label>
+					<div class="row">
+
+						<div class="col-md-6">
+
+
+							<div class="form-group">
+								<label>Day of Delivery:</label> <br> <label
+									class="radio-inline" style="margin-top: 5px;"><input
+									type="radio" name="deliveryDay" value="Monday" checked>Monday</label>
+								<label class="radio-inline" style="margin-top: 5px;"><input
+									type="radio" name="deliveryDay" value="Saturday">Saturday</label>
+
+							</div>
+						</div>
+						<div class="col-md-6">
+
+							<div class="form-group">
+								<label>Time of Delivery:</label> <br> <label> <select
+									class="btn btn-default" name="receivePeriod">
+										<option value="8">8am</option>
+										<option value="10">10am</option>
+										<option value="12">12pm</option>
+										<option value="14">2pm</option>
+										<option value="16">4pm</option>
+										<option value="18">6pm</option>
+								</select></label>
+							</div>
+						</div>
+
 
 					</div>
+
+
 				</div>
 
 				<div class="col-md-5 col-md-offset-2">
@@ -98,7 +123,6 @@
 					%>
 
 				</div>
-
 
 				<input type="submit" class="btn btn-primary voffset50"
 					style="font-size: 18px" value="Submit Order">

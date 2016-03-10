@@ -181,7 +181,7 @@ public class OrderServlet extends HttpServlet
 		String receiverPhone = request.getParameter("receiverPhone");
 		String flowers = String.join(", ", request.getParameterValues("checkedFlowers"));
 		String deliveryDay = request.getParameter("deliveryDay");
-		int receivePeriod = 11;//Integer.parseInt(request.getParameter("receivePeriod"));
+		int receivePeriod = Integer.parseInt(request.getParameter("receivePeriod"));
 		int timesLeft = 3;//After order has created, 3 orders left. Integer.parseInt(request.getParameter("timesLeft"));
 		Order order = new Order(userPhoneNum, password, receiverName, receiverAddr, receiverPhone, flowers, deliveryDay,
 				receivePeriod, timesLeft);
