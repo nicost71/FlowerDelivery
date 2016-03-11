@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,7 +39,7 @@ public class FlowerServlet extends HttpServlet {
 		try
 		{
 			DBConnection dbConnection = getDBcon();
-			ArrayList<Flower> flowers = getFlower(dbConnection);
+			ArrayList<Flower> flowers = getCurrentFlowers(dbConnection);
 			
 			// to pass flowers to jsp
 			
@@ -71,7 +72,7 @@ public class FlowerServlet extends HttpServlet {
 		{
 			DBConnection dbConnection = new DBConnection();
 			dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
-			ArrayList<Flower> flowers = getFlower(dbConnection);			
+			ArrayList<Flower> flowers = getCurrentFlowers(dbConnection);			
 			
 			dbConnection.closeDB();
 			return flowers;
@@ -82,10 +83,11 @@ public class FlowerServlet extends HttpServlet {
 		}
 	}
 
-	private static ArrayList<Flower> getFlower(DBConnection dbConnection) throws Exception
+	private static ArrayList<Flower> getCurrentFlowers(DBConnection dbConnection) throws Exception
 	{
 		ArrayList<Flower> flowers = new ArrayList<Flower>();
-		String sql = "select * from flower_house where available = 1";
+		int currentmonth = Calendar.getInstance().get(Calendar.MONTH)+1;
+		String sql = "select * from flower_house where month = "+currentmonth+" and available = 1";
 		dbConnection.rs = dbConnection.query(sql);
 		while(dbConnection.rs.next())
 		{

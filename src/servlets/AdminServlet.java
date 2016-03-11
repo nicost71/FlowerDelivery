@@ -47,7 +47,6 @@ public class AdminServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		System.out.println("aaa");
 		
 		try {
 			int userID = Integer.parseInt(request.getParameter("userID"));
@@ -56,20 +55,17 @@ public class AdminServlet extends HttpServlet {
 			dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
 			
 			int loginStatus = checkAdmin(dbConnection, userID, password);
-			System.out.println("loginStatus " +loginStatus);
+			RequestDispatcher rd;
 			if (loginStatus==1)
 			{
 				ArrayList<Order> orders = OrderServlet.getOrdersAdmin();
-				System.out.println("orders  "+orders.size());
-
-				
+				if(orders == null)
+					orders = new ArrayList<Order>();
 				request.setAttribute("orders", orders);
-				System.out.println("orders: "+ orders.size());
+				rd = request.getRequestDispatcher("/admin.jsp"); 
 			} else{
-				request.setAttribute("orders", new ArrayList<Order>());
+				rd = request.getRequestDispatcher("/admin_login.jsp"); 
 			}
-			RequestDispatcher rd = request.getRequestDispatcher("/admin.jsp");  
-			request.setAttribute("loginStatus",loginStatus);//store value  
 			
 			rd.forward(request,response);//start directing 
 			
@@ -90,7 +86,7 @@ public class AdminServlet extends HttpServlet {
 	{
 		String sql = "select * from administrator where userID=" + userID;
 		dbConnection.rs = dbConnection.query(sql);
-		int ok;
+		int ok = -1;
 		// ok = 1: this user information is correct;
 		// ok = 0: new user;
 		// ok = -1: this user information is incorrect
@@ -100,8 +96,6 @@ public class AdminServlet extends HttpServlet {
 			dbConnection.rs.next();
 			if (dbConnection.rs.getString(2).equals(password))
 				ok = 1;
-			else
-				ok = -1;
 		}
 		return ok;
 	}

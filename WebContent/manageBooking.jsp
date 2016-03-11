@@ -90,7 +90,8 @@
 						<%
 							for (int i = 0; i < orders.size(); i += 1) {
 						%>
-						<tr class="${orders.get(i).getTimesLeft() > 0 ? 'rowColor-current' : 'rowColor-old'}">
+						
+						<tr class="<%=orders.get(i).getTimesLeft() > 0 ? "rowColor-current" : "rowColor-old" %>">
 							<td><%=orders.get(i).getFlowers()%></td>
 							<td><%=orders.get(i).getReceiverName()%></td>
 							<td><%=orders.get(i).getReceiverAddr()%></td>

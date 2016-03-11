@@ -8,13 +8,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link type="text/css" rel="stylesheet" href="style/bootstrap.css" />
 <link type="text/css" rel="stylesheet" href="style/flowerDelivery.css" />
-<title>Admin Login</title>
+<title>Flower Delivery - Administrator</title>
 </head>
 <body>
 	<div class="container">
-		<a href="start.jsp"><img src="Icons/home.png" width=20px
+		<a href="start.jsp"><img src="assets/icons/home.png" width=20px
 			height="20px"></a>
-		<h2 class="text-center">Flower Delivery</h2>
+		<h2 class="text-center">Flower Delivery - Administrator</h2>
 		
 		<div class="login-container">
 			<form action="AdminServlet" method="post">

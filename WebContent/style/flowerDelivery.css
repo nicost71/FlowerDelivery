@@ -57,6 +57,18 @@ body{
     color: #333;
 }
 
+.input-editable{
+    border-radius: 5px;
+    border-image: none;
+    border: none;
+    padding: 3px;
+}
+.input-not-editable{
+	pointer-events: none;
+    background-color: transparent;
+    border: none;	
+}
+
 .rowColor-current{
 	background-color: rgba(255,255,255,0.4);
 }

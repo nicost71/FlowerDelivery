@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -99,8 +100,7 @@ public class OrderServlet extends HttpServlet
 				
 				response.sendRedirect("start.jsp");
 
-			}
-			else{
+			}else{
 				response.sendRedirect("start.jsp");
 			}
 
@@ -123,6 +123,9 @@ public class OrderServlet extends HttpServlet
 		return userPhoneNum;
 	}
 	
+	public static void updateAdmin(){
+		System.out.println("UPDATE ADMIN!");
+	}
 	public static ArrayList<Order> getOrdersAdmin() throws Exception
 	{
 		try
@@ -157,6 +160,7 @@ public class OrderServlet extends HttpServlet
 				"','" + order.getUserPhoneNum() +"','" + order.getReceiverName() +"','" + order.getReceiverAddr() +
 				"','" + order.getReceiverPhone() +"')");
 	}
+	
 
 	private ArrayList<Order> userCheckOrder(DBConnection dbConnection, String userPhoneNum) throws Exception
 	{
