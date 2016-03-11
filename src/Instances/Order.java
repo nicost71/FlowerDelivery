@@ -15,7 +15,7 @@ public class Order
 	private String receiverPhone;
 	private String flowers; //stand for flowers that the customer don't like, separated by semicolon; can be null
 	private String nextDeliveryDay;
-	private int receivePeriod;
+	private String receivePeriod;
 	private int timesLeft;
 	
 	public Order()
@@ -23,11 +23,11 @@ public class Order
 		this.orderID = cnt++;
 		this.timesLeft = 4;
 		this.nextDeliveryDay = dateFormat.format(new Date());
-		this.receivePeriod = 11;
+		this.receivePeriod = "11a.m";
 	}
 	
 	public Order(String userPhoneNum, String password, String receiverName, String receiverAddr, String receiverPhone,
-			String flowers, String date, int receivePeriod, int timesLeft)
+			String flowers, String date, String receivePeriod, int timesLeft)
 	{
 		this.orderID = cnt++;
 		this.userPhoneNum = userPhoneNum;
@@ -76,7 +76,7 @@ public class Order
 		return nextDeliveryDay;
 	}
 
-	public int getReceivePeriod()
+	public String getReceivePeriod()
 	{
 		return receivePeriod;
 	}
@@ -131,7 +131,7 @@ public class Order
 		this.password = password;
 	}
 
-	public void setReceivePeriod(int receivePeriod)
+	public void setReceivePeriod(String receivePeriod)
 	{
 		this.receivePeriod = receivePeriod;
 	}
