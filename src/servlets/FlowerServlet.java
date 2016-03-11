@@ -95,11 +95,12 @@ public class FlowerServlet extends HttpServlet {
 		dbConnection.rs = dbConnection.query(sql);
 		while(dbConnection.rs.next())
 		{
-			String flowerName = dbConnection.rs.getString(1);
-			String description = dbConnection.rs.getString(2);
-			String imageLink = dbConnection.rs.getString(3);
-			int available = dbConnection.rs.getInt(4);
-			Flower flower = new Flower(flowerName,description,imageLink,available);
+			String flowerName = dbConnection.rs.getString(2);
+			String description = dbConnection.rs.getString(3);
+			String imageLink = dbConnection.rs.getString(4);
+			int month = dbConnection.rs.getInt(5);
+			int available = dbConnection.rs.getInt(6);
+			Flower flower = new Flower(flowerName,description,imageLink,month,available);
 			flowers.add(flower);
 		}
 		return flowers;

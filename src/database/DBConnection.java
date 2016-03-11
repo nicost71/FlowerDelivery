@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Collection;
 
 import com.mysql.jdbc.Statement;
@@ -131,7 +132,7 @@ public class DBConnection
 		if (null != conn)
 			conn.close();
 	}
-	/*public static void main(String[] args)
+	public static void main(String[] args)
 	{
 		DBConnection dbConnection = new DBConnection();
 		dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
@@ -152,5 +153,5 @@ public class DBConnection
 		{
 			e.printStackTrace();
 		}
-	}*/
+	}
 }
