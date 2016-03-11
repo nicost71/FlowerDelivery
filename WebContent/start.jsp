@@ -45,6 +45,7 @@ $(document).ready(function() {
 		<div class="jumbotron text-center"
 			style="background-color: rgba(255, 255, 255, 0.4)">
 			<h1>Flower Delivery</h1>
+			<h3 style="float:right;font-style:italic;">Hot Line:2333 2333</h3>
 		</div>
 		<div class="row" style="display: table; width: 100%;">
 			<div class="col-md-3"
