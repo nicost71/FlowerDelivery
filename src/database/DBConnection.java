@@ -132,19 +132,22 @@ public class DBConnection
 		if (null != conn)
 			conn.close();
 	}
-	public static void main(String[] args)
+	/*public static void main(String[] args)
 	{
 		DBConnection dbConnection = new DBConnection();
 		dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
-		String[] flowers = "CarnationYellow, Jerusalem cherry, Lavender, NarcissusRed".split(",");
+		
+		String[] flowers = "Canna, Chrysanthemum, Scarlet sage, Tricolour amaranth".split(",");
 		System.out.println(Arrays.toString(flowers));
 		try
 		{
 			for(int i=0;i<flowers.length;i++)
 			{
+				int month = 9;
 				String flower = flowers[i].trim();
-				String link = "FlowerList/December/"+flower+".jpg";
-				String sql = "insert into flower_house values('"+flower+"','December','"+link+"',0)";
+				String id = flower+"_"+month;
+				String link = "assets/flowerList/September/"+flower+".jpg";
+				String sql = "insert into flower_house values('"+id+"','"+flower+"','asd','"+link+"',"+month+",1)";
 				System.out.println(sql);
 				dbConnection.update(sql);
 			}
@@ -153,5 +156,5 @@ public class DBConnection
 		{
 			e.printStackTrace();
 		}
-	}
+	}*/
 }

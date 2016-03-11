@@ -17,7 +17,7 @@
 		<h2 class="text-center">Flower Delivery</h2>
 		
 		<div class="login-container">
-			<form action="AdminServlet" method="POST">
+			<form action="AdminServlet" method="post">
 				<div class="form-group">
 					<label>UserID</label> <input type="text" name="userID"
 						class="form-control text-center" required>

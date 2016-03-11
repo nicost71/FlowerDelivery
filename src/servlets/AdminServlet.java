@@ -17,7 +17,7 @@ import database.DBConnection;
  * 
  * 
  */
-@WebServlet("/Admin")
+@WebServlet("/AdminServelt")
 public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -44,6 +44,7 @@ public class AdminServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		System.out.println("aaa");
 		try
 		{
 			int userID = Integer.parseInt(request.getParameter("userID"));

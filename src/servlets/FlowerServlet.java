@@ -34,10 +34,10 @@ public class FlowerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		try
 		{
-			DBConnection dbConnection = new DBConnection();
-			dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
+			DBConnection dbConnection = getDBcon();
 			ArrayList<Flower> flowers = getFlower(dbConnection);
 			
 			// to pass flowers to jsp
@@ -56,20 +56,14 @@ public class FlowerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		try
-		{
-			DBConnection dbConnection = new DBConnection();
-			dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
-			ArrayList<Flower> flowers = getFlower(dbConnection);
-			
-			// to pass flowers to jsp
-			
-			
-			dbConnection.closeDB();
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		doGet(request, response);
+	}
+	
+	public static DBConnection getDBcon()
+	{
+		DBConnection dbConnection = new DBConnection();
+		dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
+		return dbConnection;
 	}
 	
 	public static ArrayList<Flower> getCurrentFlowers() throws Exception{
