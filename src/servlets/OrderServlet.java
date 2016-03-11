@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import Instances.Flower;
 import Instances.Order;
 import database.DBConnection;
 
@@ -97,11 +99,6 @@ public class OrderServlet extends HttpServlet
 				
 				response.sendRedirect("start.jsp");
 
-			} else if (url.contains("adminCheckOrder"))
-			{
-				ArrayList<Order> orders = adminCheckOrder(dbConnection);
-				// to pass orders to js
-				response.sendRedirect("start.jsp");
 			}
 			else{
 				response.sendRedirect("start.jsp");
@@ -126,17 +123,30 @@ public class OrderServlet extends HttpServlet
 		return userPhoneNum;
 	}
 	
-	private ArrayList<Order> adminCheckOrder(DBConnection dbConnection) throws Exception
+	public static ArrayList<Order> getOrdersAdmin() throws Exception
 	{
-		ArrayList<Order> orders = new ArrayList<>();
-		String sql = "select * from orders";
-		dbConnection.rs = dbConnection.query(sql);
-		while (dbConnection.rs.next())
+		try
 		{
-			Order order = createOrder(dbConnection.rs);
-			orders.add(order);
+			System.out.println("IN GET ORDERS ADMIN");
+			DBConnection dbConnection = new DBConnection();
+			dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
+			ArrayList<Order> orders = new ArrayList<>();  //TODO: Check if current user is Admin! (SECURITY!)
+			String sql = "select * from orders";
+			dbConnection.rs = dbConnection.query(sql);
+			while (dbConnection.rs.next())
+			{
+				Order order = createOrder(dbConnection.rs);
+				orders.add(order);
+			}
+			
+			dbConnection.closeDB();
+			return orders;
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
 		}
-		return orders;
+
 		
 	}
 	private void placeOrder(DBConnection dbConnection, Order order)
@@ -201,10 +211,12 @@ public class OrderServlet extends HttpServlet
 		return order;
 	}
 
-	private Order createOrder(ResultSet rs) throws Exception
+	private static Order createOrder(ResultSet rs) throws Exception
 	{
 
 		long orderID = rs.getLong(1);
+		System.out.println("ORDERID: "+ orderID);
+
 		String nextDeliveryDay = rs.getString(2);
 		String receivePeriod = rs.getString(3);
 		int timesLeft = rs.getInt(4);

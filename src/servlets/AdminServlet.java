@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import Instances.Order;
 import database.DBConnection;
 
 /**
@@ -45,15 +48,26 @@ public class AdminServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		System.out.println("aaa");
-		try
-		{
+		
+		try {
 			int userID = Integer.parseInt(request.getParameter("userID"));
 			String password = request.getParameter("password");
 			DBConnection dbConnection = new DBConnection();
 			dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
 			
-			Integer loginStatus = new Integer(checkAdmin(dbConnection, userID, password));
-			//System.out.println(loginStatus);
+			int loginStatus = checkAdmin(dbConnection, userID, password);
+			System.out.println("loginStatus " +loginStatus);
+			if (loginStatus==1)
+			{
+				ArrayList<Order> orders = OrderServlet.getOrdersAdmin();
+				System.out.println("orders  "+orders.size());
+
+				
+				request.setAttribute("orders", orders);
+				System.out.println("orders: "+ orders.size());
+			} else{
+				request.setAttribute("orders", new ArrayList<Order>());
+			}
 			RequestDispatcher rd = request.getRequestDispatcher("/admin.jsp");  
 			request.setAttribute("loginStatus",loginStatus);//store value  
 			
