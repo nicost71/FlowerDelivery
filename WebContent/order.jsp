@@ -104,7 +104,7 @@
 						</div>
 						<div class="panel-body">
 							<div class="text-center">
-								<img src="assets/<%=flowers.get(i).getImageLink()%>" width=75px
+								<img src="<%=flowers.get(i).getImageLink()%>" width=75px
 									height="75px">
 							</div>
 

@@ -35,7 +35,7 @@
 						<h3 class="panel-title"><%=flowers.get(i).getFlowerName()%></h3>
 					</div>
 					<div class="panel-body">
-						<img src="assets/<%=flowers.get(i).getImageLink()%>" width=100px
+						<img src="<%=flowers.get(i).getImageLink()%>" width=100px
 							height="100px">
 					</div>
 					<div class="panel-body-right"><%=flowers.get(i).getDescription()%></div>
