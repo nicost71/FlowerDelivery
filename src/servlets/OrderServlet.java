@@ -2,7 +2,10 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,7 +42,34 @@ public class OrderServlet extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		// TODO Auto-generated method stub
-		doPost(request, response);
+		//doPost(request, response);
+		System.out.println("Update Single Order");
+		try{
+		long orderID = Long.parseLong(request.getParameter("orderID"));
+		String userPhoneNum = request.getParameter("userPhoneNum");
+		String receiverName = request.getParameter("receiverName");
+		String receiverAddr = request.getParameter("receiverAddr");
+		String receiverPhone = request.getParameter("receiverPhone");
+		String flowers = request.getParameter("flowers");
+		String nextDeliveryDay = request.getParameter("nextDeliveryDay");
+		String receivePeriod = request.getParameter("receivePeriod");
+		int timesLeft = Integer.parseInt(request.getParameter("timesLeft"));
+		Order order = new Order(userPhoneNum, null, receiverName, receiverAddr, receiverPhone, flowers, nextDeliveryDay,
+				receivePeriod, timesLeft);
+			
+			
+		updateSingleOrder(order, orderID);
+		ArrayList<Order> orders = getOrdersAdmin();
+			if(orders == null)
+				orders = new ArrayList<Order>();
+			request.setAttribute("orders", sortOrders(orders));
+			RequestDispatcher rd = request.getRequestDispatcher("/admin.jsp"); 
+		
+		rd.forward(request,response);
+		} catch(Exception e){
+			System.out.println("EXCEPTION: "+ e.getMessage());
+		}
+		
 	}
 
 	/**
@@ -100,8 +130,8 @@ public class OrderServlet extends HttpServlet
 				
 				response.sendRedirect("start.jsp");
 
-			}else{
-				response.sendRedirect("start.jsp");
+			} else{
+				response.sendRedirect("admin_login.jsp");
 			}
 
 			dbConnection.closeDB();
@@ -113,7 +143,7 @@ public class OrderServlet extends HttpServlet
 
 	}
 
-	static String removeSpace(String x)
+	private String removeSpace(String x)
 	{
 		String[] phones = x.trim().split(" ");
 		String userPhoneNum = "";
@@ -123,14 +153,10 @@ public class OrderServlet extends HttpServlet
 		return userPhoneNum;
 	}
 	
-	public static void updateAdmin(){
-		System.out.println("UPDATE ADMIN!");
-	}
 	public static ArrayList<Order> getOrdersAdmin() throws Exception
 	{
 		try
 		{
-			System.out.println("IN GET ORDERS ADMIN");
 			DBConnection dbConnection = new DBConnection();
 			dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
 			ArrayList<Order> orders = new ArrayList<>();  //TODO: Check if current user is Admin! (SECURITY!)
@@ -159,6 +185,17 @@ public class OrderServlet extends HttpServlet
 				"','" + order.getReceivePeriod() +"'," + order.getTimesLeft() +",'" + order.getFlowers() +
 				"','" + order.getUserPhoneNum() +"','" + order.getReceiverName() +"','" + order.getReceiverAddr() +
 				"','" + order.getReceiverPhone() +"')");
+	}
+	
+	private void updateSingleOrder(Order order, long orderID) throws SQLException{
+		System.out.println("UPDATE USER QUERY");
+		DBConnection dbConnection = new DBConnection();
+		dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
+		dbConnection.update("update orders SET nextDeliveryDay" + " = '" + order.getNextDeliveryDay() + 
+				"', receivePeriod = '" + order.getReceivePeriod() +"', timesLeft = " + order.getTimesLeft() +", flowers = '" + order.getFlowers() +
+				"', userPhoneNum = '" + order.getUserPhoneNum() +"', receiverName = '" + order.getReceiverName() +"', receiverAddr = '" + order.getReceiverAddr() +
+				"', receiverPhone = '" + order.getReceiverPhone() +"' WHERE orderID = " + orderID);
+		dbConnection.closeDB();
 	}
 	
 
@@ -209,7 +246,7 @@ public class OrderServlet extends HttpServlet
 		String flowers = String.join(", ", request.getParameterValues("checkedFlowers"));
 		String deliveryDay = request.getParameter("deliveryDay");
 		String receivePeriod = request.getParameter("receivePeriod");
-		int timesLeft = 3;//After order has created, 3 orders left. Integer.parseInt(request.getParameter("timesLeft"));
+		int timesLeft = 3;//After order has created, 3 orders left.;
 		Order order = new Order(userPhoneNum, password, receiverName, receiverAddr, receiverPhone, flowers, deliveryDay,
 				receivePeriod, timesLeft);
 		return order;
@@ -219,8 +256,6 @@ public class OrderServlet extends HttpServlet
 	{
 
 		long orderID = rs.getLong(1);
-		System.out.println("ORDERID: "+ orderID);
-
 		String nextDeliveryDay = rs.getString(2);
 		String receivePeriod = rs.getString(3);
 		int timesLeft = rs.getInt(4);
@@ -243,5 +278,16 @@ public class OrderServlet extends HttpServlet
 
 		return order;
 	}
+	
+	private ArrayList<Order> sortOrders(ArrayList<Order> orders){
+	    Collections.sort(orders, new Comparator<Order>() {
+	        @Override public int compare(Order p1, Order p2) {
+	            return p2.getTimesLeft() - p1.getTimesLeft();
+	        }
+	    });
+		return orders;
+	}
+	
+
 
 }

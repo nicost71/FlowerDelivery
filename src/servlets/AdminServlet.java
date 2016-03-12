@@ -2,6 +2,8 @@ package servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -61,7 +63,7 @@ public class AdminServlet extends HttpServlet {
 				ArrayList<Order> orders = OrderServlet.getOrdersAdmin();
 				if(orders == null)
 					orders = new ArrayList<Order>();
-				request.setAttribute("orders", orders);
+				request.setAttribute("orders", sortOrders(orders));
 				rd = request.getRequestDispatcher("/admin.jsp"); 
 			} else{
 				rd = request.getRequestDispatcher("/admin_login.jsp"); 
@@ -98,5 +100,14 @@ public class AdminServlet extends HttpServlet {
 				ok = 1;
 		}
 		return ok;
+	}
+	
+	private ArrayList<Order> sortOrders(ArrayList<Order> orders){
+	    Collections.sort(orders, new Comparator<Order>() {
+	        @Override public int compare(Order p1, Order p2) {
+	            return p2.getTimesLeft() - p1.getTimesLeft();
+	        }
+	    });
+		return orders;
 	}
 }

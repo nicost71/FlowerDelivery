@@ -19,7 +19,7 @@
 		<div class="login-container">
 			<form action="AdminServlet" method="post">
 				<div class="form-group">
-					<label>UserID</label> <input type="text" name="userID"
+					<label>UserID</label> <input type="number" name="userID"
 						class="form-control text-center" required>
 					<div class="form-group">
 						<label>Password:</label> <input type="password" name="password"
