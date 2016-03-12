@@ -24,6 +24,19 @@ public class Flower
 		this.imageLink = imageLink;
 		this.available = available;
 	}
+	
+	public Flower(String flowerID, String flowerName, String description, String imageLink, int month, int available) throws Exception
+	{
+		if(available!=0 && available!=1)
+			throw new Exception("invalid value, available should be 0 or 1 only");
+		
+		this.flowerName = flowerName;
+		this.flowerID = flowerID;
+		this.month = month;
+		this.description = description;
+		this.imageLink = imageLink;
+		this.available = available;
+	}
 
 	public String getFlowerID()
 	{

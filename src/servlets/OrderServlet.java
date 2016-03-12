@@ -22,15 +22,13 @@ import database.DBConnection;
  * Servlet implementation class OrderServlet
  */
 @WebServlet("/OrderServlet")
-public class OrderServlet extends HttpServlet
-{
+public class OrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public OrderServlet()
-	{
+	public OrderServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -39,174 +37,159 @@ public class OrderServlet extends HttpServlet
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doPost(request, response);
+		// doPost(request, response);
 		System.out.println("Update Single Order");
-		try{
-		long orderID = Long.parseLong(request.getParameter("orderID"));
-		String userPhoneNum = request.getParameter("userPhoneNum");
-		String receiverName = request.getParameter("receiverName");
-		String receiverAddr = request.getParameter("receiverAddr");
-		String receiverPhone = request.getParameter("receiverPhone");
-		String flowers = request.getParameter("flowers");
-		String nextDeliveryDay = request.getParameter("nextDeliveryDay");
-		String receivePeriod = request.getParameter("receivePeriod");
-		int timesLeft = Integer.parseInt(request.getParameter("timesLeft"));
-		Order order = new Order(userPhoneNum, null, receiverName, receiverAddr, receiverPhone, flowers, nextDeliveryDay,
-				receivePeriod, timesLeft);
-			
-			
-		updateSingleOrder(order, orderID);
-		ArrayList<Order> orders = getOrdersAdmin();
-			if(orders == null)
+		try {
+			long orderID = Long.parseLong(request.getParameter("orderID"));
+			String userPhoneNum = request.getParameter("userPhoneNum");
+			String receiverName = request.getParameter("receiverName");
+			String receiverAddr = request.getParameter("receiverAddr");
+			String receiverPhone = request.getParameter("receiverPhone");
+			String flowers = request.getParameter("flowers");
+			String nextDeliveryDay = request.getParameter("nextDeliveryDay");
+			String receivePeriod = request.getParameter("receivePeriod");
+			int timesLeft = Integer.parseInt(request.getParameter("timesLeft"));
+			Order order = new Order(userPhoneNum, null, receiverName, receiverAddr, receiverPhone, flowers,
+					nextDeliveryDay, receivePeriod, timesLeft);
+
+			updateSingleOrder(order, orderID);
+			ArrayList<Order> orders = getOrdersAdmin();
+			if (orders == null)
 				orders = new ArrayList<Order>();
 			request.setAttribute("orders", sortOrders(orders));
-			RequestDispatcher rd = request.getRequestDispatcher("/admin.jsp"); 
-		
-		rd.forward(request,response);
-		} catch(Exception e){
-			System.out.println("EXCEPTION: "+ e.getMessage());
+			RequestDispatcher rd = request.getRequestDispatcher("/admin.jsp");
+
+			rd.forward(request, response);
+		} catch (Exception e) {
+			System.out.println("EXCEPTION: " + e.getMessage());
 		}
-		
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		// handle 3 different kinds of request: placeOrder, userCheckOrder, adminCheckOrder. 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// handle 3 different kinds of request: placeOrder, userCheckOrder,
+		// adminCheckOrder.
 		// Distinguished by URL
-		try
-		{
+		try {
 			DBConnection dbConnection = new DBConnection();
 			dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
 
 			String url = request.getParameter("requestType");
 			System.out.println(url);
-			
-			if (url.contains("userCheckOrder"))
-			{
+
+			if (url.contains("userCheckOrder")) {
 				String userPhoneNum = request.getParameter("userPhoneNum");
 				userPhoneNum = removeSpace(userPhoneNum);
 				String password = request.getParameter("password");
 				int ok = checkUser(dbConnection, userPhoneNum, password);
-				if (ok==1)
-				{
+				if (ok == 1) {
 					ArrayList<Order> orders = userCheckOrder(dbConnection, userPhoneNum);
 					// to pass orders to jsp
-					
+
 					request.setAttribute("orders", orders);
-				} else{
+				} else {
 					request.setAttribute("orders", new ArrayList<Order>());
 				}
-				request.getRequestDispatcher("manageBooking.jsp").forward(request,response);
+				request.getRequestDispatcher("manageBooking.jsp").forward(request, response);
 
-				
-			} else if (url.contains("placeOrder"))
-			{
-				
+			} else if (url.contains("placeOrder")) {
+
 				String userPhoneNum = request.getParameter("userPhoneNum");
 				userPhoneNum = removeSpace(userPhoneNum);
 				String password = request.getParameter("password");
-				System.out.println("userPhoneNum: "+ userPhoneNum);
+				System.out.println("userPhoneNum: " + userPhoneNum);
 				int ok = checkUser(dbConnection, userPhoneNum, password);
-				if (ok==0)
-				{
+				if (ok == 0) {
 					// new user, create user account and order
 					dbConnection.update("insert into users values('" + userPhoneNum + "','" + password + "')");
 					Order order = createOrder(request);
 					placeOrder(dbConnection, order);
-				}
-				else if(ok==1)
-				{
+				} else if (ok == 1) {
 					// user account already exists
 					Order order = createOrder(request);
 					placeOrder(dbConnection, order);
 				}
-				
+
 				response.sendRedirect("start.jsp");
 
-			} else{
+			} else {
 				response.sendRedirect("admin_login.jsp");
 			}
 
 			dbConnection.closeDB();
 			return;
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	private String removeSpace(String x)
-	{
+	private String removeSpace(String x) {
 		String[] phones = x.trim().split(" ");
 		String userPhoneNum = "";
-		for(int i=0;i<phones.length;i++)
-			userPhoneNum+=phones[i];
-		
+		for (int i = 0; i < phones.length; i++)
+			userPhoneNum += phones[i];
+
 		return userPhoneNum;
 	}
-	
-	public static ArrayList<Order> getOrdersAdmin() throws Exception
-	{
-		try
-		{
+
+	public static ArrayList<Order> getOrdersAdmin() throws Exception {
+		try {
 			DBConnection dbConnection = new DBConnection();
 			dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
-			ArrayList<Order> orders = new ArrayList<>();  //TODO: Check if current user is Admin! (SECURITY!)
+			ArrayList<Order> orders = new ArrayList<>(); // TODO: Check if
+															// current user is
+															// Admin!
+															// (SECURITY!)
 			String sql = "select * from orders";
 			dbConnection.rs = dbConnection.query(sql);
-			while (dbConnection.rs.next())
-			{
+			while (dbConnection.rs.next()) {
 				Order order = createOrder(dbConnection.rs);
 				orders.add(order);
 			}
-			
+
 			dbConnection.closeDB();
 			return orders;
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 
-		
 	}
-	private void placeOrder(DBConnection dbConnection, Order order)
-	{
+
+	private void placeOrder(DBConnection dbConnection, Order order) {
 		long id = System.currentTimeMillis();
-		dbConnection.update("insert into orders values(" + id + ",'" + order.getNextDeliveryDay() + 
-				"','" + order.getReceivePeriod() +"'," + order.getTimesLeft() +",'" + order.getFlowers() +
-				"','" + order.getUserPhoneNum() +"','" + order.getReceiverName() +"','" + order.getReceiverAddr() +
-				"','" + order.getReceiverPhone() +"')");
+		dbConnection.update("insert into orders values(" + id + ",'" + order.getNextDeliveryDay() + "','"
+				+ order.getReceivePeriod() + "'," + order.getTimesLeft() + ",'" + order.getFlowers() + "','"
+				+ order.getUserPhoneNum() + "','" + order.getReceiverName() + "','" + order.getReceiverAddr() + "','"
+				+ order.getReceiverPhone() + "')");
 	}
-	
-	private void updateSingleOrder(Order order, long orderID) throws SQLException{
-		System.out.println("UPDATE USER QUERY");
+
+	private void updateSingleOrder(Order order, long orderID) throws SQLException {
 		DBConnection dbConnection = new DBConnection();
 		dbConnection.conn = dbConnection.getConnection("FlowerDelivery");
-		dbConnection.update("update orders SET nextDeliveryDay" + " = '" + order.getNextDeliveryDay() + 
-				"', receivePeriod = '" + order.getReceivePeriod() +"', timesLeft = " + order.getTimesLeft() +", flowers = '" + order.getFlowers() +
-				"', userPhoneNum = '" + order.getUserPhoneNum() +"', receiverName = '" + order.getReceiverName() +"', receiverAddr = '" + order.getReceiverAddr() +
-				"', receiverPhone = '" + order.getReceiverPhone() +"' WHERE orderID = " + orderID);
+		dbConnection.update("update orders SET nextDeliveryDay" + " = '" + order.getNextDeliveryDay()
+				+ "', receivePeriod = '" + order.getReceivePeriod() + "', timesLeft = " + order.getTimesLeft()
+				+ ", flowers = '" + order.getFlowers() + "', userPhoneNum = '" + order.getUserPhoneNum()
+				+ "', receiverName = '" + order.getReceiverName() + "', receiverAddr = '" + order.getReceiverAddr()
+				+ "', receiverPhone = '" + order.getReceiverPhone() + "' WHERE orderID = " + orderID);
 		dbConnection.closeDB();
 	}
-	
 
-	private ArrayList<Order> userCheckOrder(DBConnection dbConnection, String userPhoneNum) throws Exception
-	{
+	private ArrayList<Order> userCheckOrder(DBConnection dbConnection, String userPhoneNum) throws Exception {
 		ArrayList<Order> orders = new ArrayList<>();
-		if(!userPhoneNum.isEmpty()){
+		if (!userPhoneNum.isEmpty()) {
 			String sql = "select * from orders where userPhoneNum=" + userPhoneNum;
 			dbConnection.rs = dbConnection.query(sql);
-			while (dbConnection.rs.next())
-			{
+			while (dbConnection.rs.next()) {
 				Order order = createOrder(dbConnection.rs);
 				orders.add(order);
 			}
@@ -214,29 +197,26 @@ public class OrderServlet extends HttpServlet
 		return orders;
 	}
 
-	private int checkUser(DBConnection dbConnection, String userPhoneNum, String password) throws Exception
-	{
+	private int checkUser(DBConnection dbConnection, String userPhoneNum, String password) throws Exception {
 		int ok = -1;
-		if(!userPhoneNum.isEmpty()){
+		if (!userPhoneNum.isEmpty()) {
 			String sql = "select * from users where userPhoneNum =" + userPhoneNum;
-			System.out.println("Query: "+sql);
+			System.out.println("Query: " + sql);
 			dbConnection.rs = dbConnection.query(sql);
 			// ok = 1: this user information is correct;
 			// ok = 0: new user;
 			// ok = -1: this user information is incorrect
-			if (!dbConnection.rs.next()){
+			if (!dbConnection.rs.next()) {
 				ok = 0;
-			}
-			else if (dbConnection.rs.getString(2).equals(password)){
+			} else if (dbConnection.rs.getString(2).equals(password)) {
 				ok = 1;
 			}
 		}
-		System.out.println("OK "+ok);
+		System.out.println("OK " + ok);
 		return ok;
 	}
 
-	private Order createOrder(HttpServletRequest request)
-	{
+	private Order createOrder(HttpServletRequest request) {
 		String userPhoneNum = request.getParameter("userPhoneNum");
 		userPhoneNum = removeSpace(userPhoneNum);
 		String password = request.getParameter("password");
@@ -246,14 +226,13 @@ public class OrderServlet extends HttpServlet
 		String flowers = String.join(", ", request.getParameterValues("checkedFlowers"));
 		String deliveryDay = request.getParameter("deliveryDay");
 		String receivePeriod = request.getParameter("receivePeriod");
-		int timesLeft = 3;//After order has created, 3 orders left.;
+		int timesLeft = 3;// After order has created, 3 orders left.;
 		Order order = new Order(userPhoneNum, password, receiverName, receiverAddr, receiverPhone, flowers, deliveryDay,
 				receivePeriod, timesLeft);
 		return order;
 	}
 
-	private static Order createOrder(ResultSet rs) throws Exception
-	{
+	private static Order createOrder(ResultSet rs) throws Exception {
 
 		long orderID = rs.getLong(1);
 		String nextDeliveryDay = rs.getString(2);
@@ -278,16 +257,15 @@ public class OrderServlet extends HttpServlet
 
 		return order;
 	}
-	
-	private ArrayList<Order> sortOrders(ArrayList<Order> orders){
-	    Collections.sort(orders, new Comparator<Order>() {
-	        @Override public int compare(Order p1, Order p2) {
-	            return p2.getTimesLeft() - p1.getTimesLeft();
-	        }
-	    });
+
+	private ArrayList<Order> sortOrders(ArrayList<Order> orders) {
+		Collections.sort(orders, new Comparator<Order>() {
+			@Override
+			public int compare(Order p1, Order p2) {
+				return p2.getTimesLeft() - p1.getTimesLeft();
+			}
+		});
 		return orders;
 	}
-	
-
 
 }

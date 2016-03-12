@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Instances.Flower;
 import Instances.Order;
 import database.DBConnection;
 
@@ -39,7 +40,24 @@ public class AdminServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request, response);
+
+		boolean adminFlowers = request.getParameter("adminOrders") == null;
+		try{
+			if(!adminFlowers){
+			ArrayList<Order> orders = OrderServlet.getOrdersAdmin();
+			if(orders == null)
+				orders = new ArrayList<Order>();
+			request.setAttribute("orders", sortOrders(orders));
+			} else{
+				ArrayList<Flower> flowers = FlowerServlet.getAllFlowersAdmin();
+				request.setAttribute("flowerList", flowers);
+			}
+			RequestDispatcher rd = request.getRequestDispatcher("/admin.jsp"); 
+		
+			rd.forward(request,response);
+		}catch(Exception e){
+			
+		}
 		 
 	}
 
