@@ -26,6 +26,8 @@
 		<h2 class="text-center">Manage Booking</h2>
 		<%
 			ArrayList<Order> orders = (ArrayList<Order>) request.getAttribute("orders");
+		String status = (String) request.getAttribute("status");
+
 			if (orders == null || orders.size() == 0) {
 		%>
 		<div class="login-container">
@@ -38,14 +40,29 @@
 					<span class="input-group-addon"><i
 						class="custom-icon icon-person small"></i></span> <input type="text"
 						class="form-control" name="userPhoneNum"
+						value="<%=request.getAttribute("userPhoneNum") != null ? request.getAttribute("userPhoneNum") : ""%>"
 						placeholder="Phone Number">
 				</div>
+										<%
+							if (status != null && status.equals("invalidUser")) {
+						%>
+						<p class="invalid-input">User not found</p>
+						<%
+							}
+						%>
 
 				<div class="input-group" style="margin-bottom: 10px">
 					<span class="input-group-addon"><i
 						class="custom-icon icon-lock small"></i></span> <input type="password"
 						class="form-control" name="password" placeholder="Password">
 				</div>
+															<%
+							if (status != null && status.equals("invalidPw")) {
+						%>
+						<p class="invalid-input">Invalid Password</p>
+						<%
+							}
+						%>
 
 				<div class="text-center voffset30">
 					<input type="submit" class="btn btn-primary" value="Check Order">
@@ -57,9 +74,11 @@
 		<%
 			}
 			if (orders != null && orders.size() == 0) {
+				if(status == null){
 		%>
 		<h4 class="text-center voffset50">No orders found</h4>
 		<%
+				}
 			} else if (orders != null) {
 		%>
 

@@ -96,7 +96,13 @@ public class OrderServlet extends HttpServlet {
 
 					request.setAttribute("orders", orders);
 				} else {
+					if(ok == 0){
+						request.setAttribute("status", "invalidUser");
+					} else{
+						request.setAttribute("status", "invalidPw");
+					}
 					request.setAttribute("orders", new ArrayList<Order>());
+					request.setAttribute("userPhoneNum", request.getParameter("userPhoneNum"));
 				}
 				request.getRequestDispatcher("manageBooking.jsp").forward(request, response);
 
