@@ -16,7 +16,7 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="start.jsp"> <img alt="Brand"
-					src="assets/icons/home.png" style="max-width: 20px">
+					src="assets/icons/logo_icon_64.png" style="max-height: 30px; margin-top: -5px;">
 				</a> <span class="navbar-brand"
 					style="border-left: 1px solid rgba(0, 0, 0, 0.2); margin-left: 0px; font-size: 15px">
 					Manage Booking </span>

@@ -42,22 +42,27 @@ $(document).ready(function() {
 
 	<div class="container">
 
-		<div class="jumbotron text-center"
-			style="background-color: rgba(255, 255, 255, 0.4)">
-			<h1>Flower Delivery</h1>
-			<h3 style="float:right;font-style:italic;">Hot Line:2333 2333</h3>
+		<div class="row" style="margin-bottom: 50px">
+			<div class="col-md-7 logo-container" style="text-align: left">
+				<img alt="logo" src="assets/logo.png">
+			</div>
+			<div class="col-md-offset-2 col-md-3" style="margin-top: 70px">
+				<a class="pull-right" href="help.jsp"><img
+					src="assets/icons/info_64.png" style="max-height: 40px"></a>
+			</div>
 		</div>
+
 		<div class="row" style="display: table; width: 100%;">
 			<div class="col-md-3"
 				style="display: table-cell; float: none; vertical-align: middle;">
-				<h2>Current Flowers</h2>
+				<h2>Welcome to Flower Delivery</h2>
+				<br>
+				<h3>Order flowers of the month directly to your home!</h3>
 			</div>
 			<div class="col-md-9" style="display: table-cell; float: none;">
 				<%
-					if (flowers != null)
-					{
-						for (int i = 0; i < flowers.size(); i += 1)
-						{
+					if (flowers != null) {
+						for (int i = 0; i < flowers.size(); i += 1) {
 				%>
 
 				<div class="panel panel-default panel-horizontal">
@@ -66,8 +71,7 @@ $(document).ready(function() {
 					</div>
 					<div class="panel-body">
 						<a href="<%=flowers.get(i).getImageLink()%>"
-							class="image-popup-no-margins"> 
-							<img
+							class="image-popup-no-margins"> <img
 							src="<%=flowers.get(i).getImageLink()%>" width="100px"
 							height="100px" />
 						</a>
