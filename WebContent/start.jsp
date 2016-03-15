@@ -58,6 +58,7 @@ $(document).ready(function() {
 				<h2>Welcome to Flower Delivery</h2>
 				<br>
 				<h3>Order flowers of the month directly to your home!</h3>
+				<h3>Every week your world has new sights!</h3>
 			</div>
 			<div class="col-md-9" style="display: table-cell; float: none;">
 				<%
