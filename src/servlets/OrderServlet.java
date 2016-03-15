@@ -112,13 +112,28 @@ public class OrderServlet extends HttpServlet {
 					dbConnection.update("insert into users values('" + userPhoneNum + "','" + password + "')");
 					Order order = createOrder(request);
 					placeOrder(dbConnection, order);
+					request.setAttribute("status", "orderPlaced");
+					request.setAttribute("order",  order);
+
 				} else if (ok == 1) {
 					// user account already exists
 					Order order = createOrder(request);
 					placeOrder(dbConnection, order);
+					request.setAttribute("status", "orderPlaced");
+					request.setAttribute("order",  order);
+				} else if(ok == -1){
+					request.setAttribute("status", "invalidInput");
+					request.setAttribute("userPhoneNum", request.getParameter("userPhoneNum"));
+					request.setAttribute("receiverAddr", request.getParameter("receiverAddr"));
+					request.setAttribute("receiverName", request.getParameter("receiverName"));
+					request.setAttribute("receiverPhone", request.getParameter("receiverPhone"));
+					request.setAttribute("receivePeriod", request.getParameter("receivePeriod"));
+					request.setAttribute("deliveryDay", request.getParameter("deliveryDay"));
+					request.setAttribute("checkedFlowers", request.getParameterValues("checkedFlowers"));
+
 				}
 
-				response.sendRedirect("start.jsp");
+				request.getRequestDispatcher("order.jsp").forward(request, response);
 
 			} else {
 				response.sendRedirect("admin_login.jsp");
@@ -198,15 +213,19 @@ public class OrderServlet extends HttpServlet {
 	}
 
 	private int checkUser(DBConnection dbConnection, String userPhoneNum, String password) throws Exception {
-		int ok = -1;
+		int ok =-1;
 		if (!userPhoneNum.isEmpty()) {
-			String sql = "select * from users where userPhoneNum =" + userPhoneNum;
+			System.out.println(userPhoneNum);
+			String sql = "select * from users where userPhoneNum = '" + userPhoneNum+"'";
 			System.out.println("Query: " + sql);
 			dbConnection.rs = dbConnection.query(sql);
 			// ok = 1: this user information is correct;
 			// ok = 0: new user;
 			// ok = -1: this user information is incorrect
-			if (!dbConnection.rs.next()) {
+			if(dbConnection.rs == null){
+				ok = -1;
+			}
+			else if (!dbConnection.rs.next()) {
 				ok = 0;
 			} else if (dbConnection.rs.getString(2).equals(password)) {
 				ok = 1;
@@ -223,7 +242,7 @@ public class OrderServlet extends HttpServlet {
 		String receiverName = request.getParameter("receiverName");
 		String receiverAddr = request.getParameter("receiverAddr");
 		String receiverPhone = request.getParameter("receiverPhone");
-		String flowers = String.join(", ", request.getParameterValues("checkedFlowers"));
+		String flowers = request.getParameterValues("checkedFlowers") == null ? "none" : String.join(", ", request.getParameterValues("checkedFlowers"));
 		String deliveryDay = request.getParameter("deliveryDay");
 		String receivePeriod = request.getParameter("receivePeriod");
 		int timesLeft = 3;// After order has created, 3 orders left.;

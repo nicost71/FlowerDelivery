@@ -13,6 +13,10 @@ body {
 	margin-top: 50px;
 }
 
+.invalid-input {
+	color: red;
+}
+
 .row {
 	margin-right: 0px;
 	margin-left: 0px;
