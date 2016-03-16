@@ -90,7 +90,7 @@
 		<%
 			} else if (orders != null) {
 		%>
-		<form action="OrderServlet" method="POST">
+		<form action="OrderServlet" method="POST" style="display: inline-table; width:100%;">
 			<div>
 				<input type="hidden" name="requestType" value="adminUpdate">
 				<input type="hidden" name="orders" value="<%=orders%>">
@@ -181,7 +181,6 @@
 				</div>
 			</div>
 		</form>
-
 
 		<%
 			} else if (orders == null) {

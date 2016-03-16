@@ -55,14 +55,14 @@ function openModal(flowerName, imageLink, description){
 	<div class="container">
 
 		<div class="row" style="margin-bottom: 50px">
-			<div class="col-md-6 logo-container" style="text-align: left">
-				<img alt="logo" src="assets/logo2.png">
+			<div class="col-sm-6 logo-container" style="text-align: left">
+				<img alt="logo" src="assets/logo2.png" style="max-width:400px">
 			</div>
-			<div class="col-md-5">
-				<h3 class="pull-right" style="margin-top: 95px">Every week your
+			<div class="col-sm-5">
+				<h3 class="pull-right" style="margin-top: 60px">Every week your
 					world has new sights!</h3>
 			</div>
-			<div class="col-md-1" style="margin-top: 85px">
+			<div class="col-sm-1" style="margin-top: 50px">
 				<a href="help.jsp"><img class="pull-right"
 					src="assets/icons/info_64.png" style="max-height: 40px"></a>
 			</div>
@@ -75,7 +75,7 @@ function openModal(flowerName, imageLink, description){
 				<br>
 				<h3>Order flowers of the month directly to your home</h3>
 				<br>
-				<h3>4 Bouquets are included in one order!</h3>
+				<h3 style="font-weight: bold">Just $50 for 4 Bouquets!</h3>
 			</div>
 			<div class="col-md-9" style="display: table-cell; float: none;">
 				<%
