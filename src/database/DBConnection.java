@@ -18,7 +18,7 @@ public class DBConnection
 	public static String url;
 	public static String dbdriver = "com.mysql.jdbc.Driver";
 	public static String username = "root";
-	public static String password = "toor";
+	public static String password = "890211";
 
 	public Connection conn;
 	public Statement st;
