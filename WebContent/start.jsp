@@ -9,6 +9,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="style/bootstrap.css" />
 <link type="text/css" rel="stylesheet" href="style/flowerDelivery.css" />
+<link href='https://fonts.googleapis.com/css?family=Josefin+Sans'
+	rel='stylesheet' type='text/css'>
 <title>Flower Delivery</title>
 
 <style>
@@ -17,24 +19,34 @@
 }
 </style>
 <script>
-$(document).ready(function() {
 
-	$('.image-popup-no-margins').magnificPopup({
-		type: 'image',
-		closeOnContentClick: true,
-		closeBtnInside: false,
-		fixedContentPos: true,
-		mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
-		image: {
-			verticalFit: true
-		},
-		zoom: {
-			enabled: true,
-			duration: 300 // don't foget to change the duration also in CSS
-		}
-	});
+function openModal(flowerName, imageLink, description){
+	// Get the modal
+	var modal = document.getElementById('myModal');
+	var modalHeader = document.getElementById('modal-header');
+	modalHeader.innerHTML = flowerName;
+	var modalImage = document.getElementById('modalImage');
+	modalImage.src = imageLink;
+	var modalDescription = document.getElementById('modal-description');
+	modalDescription.innerHTML = description;
 
-});
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	    modal.style.display = "block";
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	    modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+	}
+}
 </script>
 </head>
 <body
@@ -43,11 +55,15 @@ $(document).ready(function() {
 	<div class="container">
 
 		<div class="row" style="margin-bottom: 50px">
-			<div class="col-md-7 logo-container" style="text-align: left">
-				<img alt="logo" src="assets/logo.png">
+			<div class="col-md-6 logo-container" style="text-align: left">
+				<img alt="logo" src="assets/logo2.png">
 			</div>
-			<div class="col-md-offset-2 col-md-3" style="margin-top: 70px">
-				<a class="pull-right" href="help.jsp"><img
+			<div class="col-md-5">
+				<h3 class="pull-right" style="margin-top: 95px">Every week your
+					world has new sights!</h3>
+			</div>
+			<div class="col-md-1" style="margin-top: 85px">
+				<a href="help.jsp"><img class="pull-right"
 					src="assets/icons/info_64.png" style="max-height: 40px"></a>
 			</div>
 		</div>
@@ -57,8 +73,9 @@ $(document).ready(function() {
 				style="display: table-cell; float: none; vertical-align: middle;">
 				<h2>Welcome to Flower Delivery</h2>
 				<br>
-				<h3>Order flowers of the month directly to your home!</h3>
-				<h3>Every week your world has new sights!</h3>
+				<h3>Order flowers of the month directly to your home</h3>
+				<br>
+				<h3>4 Bouquets are included in one order!</h3>
 			</div>
 			<div class="col-md-9" style="display: table-cell; float: none;">
 				<%
@@ -66,18 +83,14 @@ $(document).ready(function() {
 						for (int i = 0; i < flowers.size(); i += 1) {
 				%>
 
-				<div class="panel panel-default panel-horizontal">
+				<div class="panel panel-default panel-horizontal"
+					onclick="openModal('<%=flowers.get(i).getFlowerName()%>','<%=flowers.get(i).getImageLink()%>', '<%=flowers.get(i).getDescription()%>')">
 					<div class="panel-heading panel-fixed-length">
 						<h3 class="panel-title"><%=flowers.get(i).getFlowerName()%></h3>
 					</div>
 					<div class="panel-body">
-						<a href="<%=flowers.get(i).getImageLink()%>"
-							class="image-popup-no-margins"> <img
-							src="<%=flowers.get(i).getImageLink()%>" width="100px"
-							height="100px" />
-						</a>
-						<!-- <img src="<%=flowers.get(i).getImageLink()%>" width=100px
-							height="100px" id="img"> -->
+						<img src="<%=flowers.get(i).getImageLink()%>" width=100px
+							height="100px" id="img">
 					</div>
 					<div class="panel-body-right"><%=flowers.get(i).getDescription()%></div>
 				</div>
@@ -107,6 +120,27 @@ $(document).ready(function() {
 						style="font-size: 22px;">
 				</form>
 			</div>
+		</div>
+
+	</div>
+
+	<div id="myModal" class="modal">
+
+		<div class="modal-content">
+			<div class="modal-header">
+				<span class="close">X</span>
+				<h2 id="modal-header"></h2>
+			</div>
+			<div class="modal-body row voffset30">
+				<div class="col-md-3">
+					<img id="modalImage" alt="" src=""
+						style="max-height: 300px; max-width: 300px">
+				</div>
+				<div class="col-md-9">
+					<div id="modal-description" style="font-size: 18px"></div>
+				</div>
+			</div>
+
 		</div>
 
 	</div>

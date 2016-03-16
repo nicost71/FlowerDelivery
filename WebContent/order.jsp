@@ -10,6 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link type="text/css" rel="stylesheet" href="style/bootstrap.css" />
 <link type="text/css" rel="stylesheet" href="style/flowerDelivery.css" />
+<link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
 <title>New Flower Order</title>
 </head>
 <body
@@ -20,7 +21,7 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="start.jsp"> <img alt="Brand"
-					src="assets/icons/logo_icon_64.png" style="max-height: 30px; margin-top: -5px;">
+					src="assets/icons/logo2_icon_64.png" style="max-height: 30px; margin-top: -5px;">
 				</a> <span class="navbar-brand"
 					style="border-left: 1px solid rgba(0, 0, 0, 0.2); margin-left: 0px; font-size: 15px">
 					New Order </span>
@@ -42,7 +43,7 @@
 			<form action="OrderServlet" method="POST">
 				<input type="hidden" name="requestType" value="placeOrder">
 
-				<div class="col-md-5">
+				<div class="col-md-5" style="padding: 0px">
 					<div class="form-group">
 						<label>Phone Nr:</label> <input type="text" name="userPhoneNum"
 							value="<%=request.getAttribute("userPhoneNum") != null ? request.getAttribute("userPhoneNum") : ""%>"
@@ -83,7 +84,7 @@
 
 					<div class="row">
 
-						<div class="col-md-6">
+						<div class="col-md-6" style="padding: 0px">
 
 
 							<div class="form-group">
@@ -138,7 +139,7 @@
 
 				</div>
 
-				<div class="col-md-5 col-md-offset-2">
+				<div class="col-md-5 col-md-offset-2" style="padding: 0px">
 					<%
 						if (flowers != null) {
 								String[] checkedFlowers = (String[]) request.getAttribute("checkedFlowers");

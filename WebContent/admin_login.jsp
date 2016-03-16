@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link type="text/css" rel="stylesheet" href="style/bootstrap.css" />
 <link type="text/css" rel="stylesheet" href="style/flowerDelivery.css" />
+<link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
 <title>Flower Delivery - Administrator</title>
 </head>
 <body>

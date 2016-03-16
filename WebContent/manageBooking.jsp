@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link type="text/css" rel="stylesheet" href="style/bootstrap.css" />
 <link type="text/css" rel="stylesheet" href="style/flowerDelivery.css" />
+<link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
 <title>Manage Booking</title>
 </head>
 <body>
@@ -16,7 +17,7 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="start.jsp"> <img alt="Brand"
-					src="assets/icons/logo_icon_64.png" style="max-height: 30px; margin-top: -5px;">
+					src="assets/icons/logo2_icon_64.png" style="max-height: 30px; margin-top: -5px;">
 				</a> <span class="navbar-brand"
 					style="border-left: 1px solid rgba(0, 0, 0, 0.2); margin-left: 0px; font-size: 15px">
 					Manage Booking </span>

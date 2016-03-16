@@ -91,10 +91,8 @@ public class OrderServlet extends HttpServlet {
 				String password = request.getParameter("password");
 				int ok = checkUser(dbConnection, userPhoneNum, password);
 				if (ok == 1) {
-					ArrayList<Order> orders = userCheckOrder(dbConnection, userPhoneNum);
-					// to pass orders to jsp
 
-					request.setAttribute("orders", orders);
+					request.setAttribute("orders", sortOrders(userCheckOrder(dbConnection, userPhoneNum)));
 				} else {
 					if(ok == 0){
 						request.setAttribute("status", "invalidUser");
