@@ -132,11 +132,11 @@ function openModal(flowerName, imageLink, description){
 				<h2 id="modal-header"></h2>
 			</div>
 			<div class="modal-body row voffset30">
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<img id="modalImage" alt="" src=""
-						style="max-height: 300px; max-width: 300px">
+						style="max-width: 100%">
 				</div>
-				<div class="col-md-9">
+				<div class="col-md-8">
 					<div id="modal-description" style="font-size: 18px"></div>
 				</div>
 			</div>
