@@ -249,7 +249,7 @@ public class OrderServlet extends HttpServlet {
 		String flowers = request.getParameterValues("checkedFlowers") == null ? "none" : String.join(", ", request.getParameterValues("checkedFlowers"));
 		String deliveryDay = request.getParameter("deliveryDay");
 		String receivePeriod = request.getParameter("receivePeriod");
-		int timesLeft = 3;// After order has created, 3 orders left.;
+		int timesLeft = 4;
 		Order order = new Order(userPhoneNum, password, receiverName, receiverAddr, receiverPhone, flowers, deliveryDay,
 				receivePeriod, timesLeft);
 		return order;
