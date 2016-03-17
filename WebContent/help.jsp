@@ -71,7 +71,7 @@
 			<ul style="font-size: 18px">
 				<li>Seasonal</li>
 				<li>1 bouquet per week</li>
-				<li>4 times per month</li>
+				<li>4 deliveries per month</li>
 				<li>Random collocation</li>
 				<li>Delivery on Monday or Saturday (from 8a.m to 6p.m)</li>
 			</ul>
