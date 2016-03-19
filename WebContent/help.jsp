@@ -11,14 +11,12 @@
 </head>
 <body>
 	<div class="container">
-		<nav class="navbar navbar-default" style="margin-bottom: 40px">
+		<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="start.jsp"> <img alt="Brand"
-					src="assets/icons/logo2_icon_64.png"
-					style="max-height: 30px; margin-top: -5px;">
-				</a> <span class="navbar-brand"
-					style="border-left: 1px solid rgba(0, 0, 0, 0.2); margin-left: 0px; font-size: 15px">
+				<a class="navbar-brand" href="start.jsp"> <img alt="Brand" class="navbar-icon"
+					src="assets/icons/logo2_icon_64.png">
+				</a> <span class="navbar-brand">
 					Help </span>
 			</div>
 		</div>

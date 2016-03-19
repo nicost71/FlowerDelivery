@@ -30,12 +30,10 @@ function openModal(flowerName, imageLink, description){
 	var modalDescription = document.getElementById('modal-description');
 	modalDescription.innerHTML = description;
 
-	// Get the <span> element that closes the modal
 	var span = document.getElementsByClassName("close")[0];
 
 	    modal.style.display = "block";
 
-	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {
 	    modal.style.display = "none";
 	}
@@ -54,30 +52,29 @@ function openModal(flowerName, imageLink, description){
 
 	<div class="container">
 
-		<div class="row" style="margin-bottom: 50px">
-			<div class="col-sm-6 logo-container" style="text-align: left">
+		<div class="row" class="boffset50">
+			<div class="col-sm-6 logo-container">
 				<img alt="logo" src="assets/logo2.png" style="max-width:400px">
 			</div>
 			<div class="col-sm-5">
-				<h3 class="pull-right" style="margin-top: 60px">Every week your
+				<h3 class="pull-right voffset60">Every week your
 					world has new sights!</h3>
 			</div>
-			<div class="col-sm-1" style="margin-top: 50px">
+			<div class="col-sm-1 voffset50">
 				<a href="help.jsp"><img class="pull-right"
 					src="assets/icons/info_64.png" style="max-height: 40px"></a>
 			</div>
 		</div>
 
-		<div class="row" style="display: table; width: 100%;">
-			<div class="col-md-3"
-				style="display: table-cell; float: none; vertical-align: middle;">
+		<div class="row" class="start-container">
+			<div class="col-md-3 start-text">
 				<h2>Welcome to Flower Delivery</h2>
 				<br>
 				<h3>Order flowers of the month directly to your home</h3>
 				<br>
 				<h3 style="font-weight: bold">Just $50 for 4 Bouquets!</h3>
 			</div>
-			<div class="col-md-9" style="display: table-cell; float: none;">
+			<div class="col-md-9 flower-container">
 				<%
 					if (flowers != null) {
 						for (int i = 0; i < flowers.size(); i += 1) {
@@ -108,16 +105,14 @@ function openModal(flowerName, imageLink, description){
 			<div class="col-md-6 text-center">
 				<form action="StartServlet" method="get">
 					<input type="hidden" name="action" value="order"> <input
-						class="btn btn-primary" type="submit" value="Order Flower"
-						style="font-size: 22px;">
+						class="btn btn-primary" type="submit" value="Order Flower">
 				</form>
 			</div>
 
 			<div class="col-md-6 text-center">
 				<form action="StartServlet" method="get">
 					<input type="hidden" name="action" value="booking"> <input
-						class="btn btn-primary" type="submit" value="Manage Booking"
-						style="font-size: 22px;">
+						class="btn btn-primary" type="submit" value="Manage Booking">
 				</form>
 			</div>
 		</div>
@@ -137,7 +132,7 @@ function openModal(flowerName, imageLink, description){
 						style="max-width: 100%">
 				</div>
 				<div class="col-md-8">
-					<div id="modal-description" style="font-size: 18px"></div>
+					<div id="modal-description"></div>
 				</div>
 			</div>
 

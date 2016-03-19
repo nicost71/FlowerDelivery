@@ -17,6 +17,22 @@ h1, h2, h3, h4, span, td, p, body, ul{
 	margin-top: 50px;
 }
 
+.voffset60 {
+	margin-top: 60px;
+}
+
+.boffset10{
+	margin-bottom:10px;
+}
+
+.boffset40{
+	margin-bottom:40px;
+}
+
+.boffset50{
+	margin-bottom:50px;
+}
+
 .invalid-input {
 	color: red;
 }
@@ -26,8 +42,22 @@ h1, h2, h3, h4, span, td, p, body, ul{
 	margin-left: 0px;
 }
 
+.navbar{
+	margin-bottom: 40px;
+}
 .navbar-default .navbar-brand {
     color: rgba(0,0,0,0.9);
+}
+
+.navbar-icon{
+	max-height: 30px;
+	margin-top: -5px;
+}
+
+.navbar-brand{
+	border-left: 1px solid rgba(0, 0, 0, 0.2);
+	margin-left: 0px;
+	font-size: 15px;
 }
 
 .login-container {
@@ -37,8 +67,33 @@ h1, h2, h3, h4, span, td, p, body, ul{
 	margin-top: 50px;
 }
 
+.logo-container{
+	text-align: left
+}
+
 .table-container {
 	vertical-align: middle;
+}
+
+.start-container{
+	display: table;
+	width: 100%;
+}
+
+.start-text{
+	display: table-cell;
+	float: none;
+	vertical-align: middle;
+}
+
+.flower-container{
+	display: table-cell;
+	float: none;	
+}
+
+.admin-container{
+	display: inline-table;
+	width:100%;
 }
 
 .booking-table {
@@ -76,6 +131,10 @@ h1, h2, h3, h4, span, td, p, body, ul{
 .booking-table .booking-table-header input[disabled]:-ms-input-placeholder
 	{
 	color: #333;
+}
+
+.btn{
+	font-size: 22px;
 }
 
 .input-editable {
@@ -220,6 +279,11 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 	background-color: rgba(255, 255, 255, 0.4);
 }
 
+.panel-checked-flowers{
+	width: 100%;
+	height: 25px;
+}
+
 .btn, .btn-primary {
 	background-color: rgba(255, 255, 255, 0.8);
 	border-color: rgba(255, 255, 255, 0.8);
@@ -268,6 +332,9 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     width: 80%; /* Could be more or less, depending on screen size */
 }
 
+#modal-description {
+	font-size: 18px;
+}
 /* The Close Button */
 .close {
     color: #aaa;
