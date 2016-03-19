@@ -1,12 +1,13 @@
 @CHARSET "ISO-8859-1";
 
+/*========GLOBAL CSS========*/
 body {
 	background-image: url(/FlowerDelivery/assets/bg2.jpg);
 	background-size: cover;
 }
 
-h1, h2, h3, h4, span, td, p, body, ul{
-    font-family: "Josefin Sans", "trebuchet ms", "sans-serif";
+h1, h2, h3, h4, span, td, p, body, ul {
+	font-family: "Josefin Sans", "trebuchet ms", "sans-serif";
 }
 
 .voffset30 {
@@ -21,16 +22,16 @@ h1, h2, h3, h4, span, td, p, body, ul{
 	margin-top: 60px;
 }
 
-.boffset10{
-	margin-bottom:10px;
+.boffset10 {
+	margin-bottom: 10px;
 }
 
-.boffset40{
-	margin-bottom:40px;
+.boffset40 {
+	margin-bottom: 40px;
 }
 
-.boffset50{
-	margin-bottom:50px;
+.boffset50 {
+	margin-bottom: 50px;
 }
 
 .invalid-input {
@@ -42,24 +43,88 @@ h1, h2, h3, h4, span, td, p, body, ul{
 	margin-left: 0px;
 }
 
-.navbar{
-	margin-bottom: 40px;
-}
-.navbar-default .navbar-brand {
-    color: rgba(0,0,0,0.9);
+.rowColor-current {
+	background-color: rgba(255, 255, 255, 0.4);
 }
 
-.navbar-icon{
+.rowColor-old {
+	background-color: rgba(0, 0, 0, 0.2);
+	opacity: 0.5;
+}
+
+.btn {
+	font-size: 22px;
+}
+
+.btn, .btn-primary {
+	background-color: rgba(255, 255, 255, 0.8);
+	border-color: rgba(255, 255, 255, 0.8);
+	color: rgba(0, 0, 0, 0.8);
+}
+
+.btn:hover, .btn-primary:hover {
+	background-color: rgba(255, 255, 255, 0.3);
+	border-color: rgba(255, 255, 255, 0.3);
+	color: rgba(0, 0, 0, 0.8);
+}
+
+.input-submit-header-active {
+	background-color: transparent;
+	border: none;
+	font-size: 30px;
+}
+
+.input-submit-header-inactive {
+	background-color: transparent;
+	border: none;
+	font-size: 30px;
+	opacity: 0.5;
+}
+
+.input-editable {
+	border-radius: 5px;
+	border-image: none;
+	border: none;
+	padding: 3px;
+	height: 100%;
+}
+
+.input-not-editable {
+	pointer-events: none;
+	background-color: transparent;
+	border: none;
+	height: 100%;
+	overflow: hidden;
+	resize: none;
+}
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button
+	{
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/*========NAVBAR=========*/
+.navbar {
+	margin-bottom: 40px;
+}
+
+.navbar-default .navbar-brand {
+	color: rgba(0, 0, 0, 0.9);
+}
+
+.navbar-icon {
 	max-height: 30px;
 	margin-top: -5px;
 }
 
-.navbar-brand{
+.navbar-brand {
 	border-left: 1px solid rgba(0, 0, 0, 0.2);
 	margin-left: 0px;
 	font-size: 15px;
 }
 
+/*========JSP CONTAINERS========*/
 .login-container {
 	width: 200px;
 	vertical-align: middle;
@@ -67,7 +132,7 @@ h1, h2, h3, h4, span, td, p, body, ul{
 	margin-top: 50px;
 }
 
-.logo-container{
+.logo-container {
 	text-align: left
 }
 
@@ -75,27 +140,28 @@ h1, h2, h3, h4, span, td, p, body, ul{
 	vertical-align: middle;
 }
 
-.start-container{
+.start-container {
 	display: table;
 	width: 100%;
 }
 
-.start-text{
+.start-text {
 	display: table-cell;
 	float: none;
 	vertical-align: middle;
 }
 
-.flower-container{
+.flower-container {
 	display: table-cell;
-	float: none;	
+	float: none;
 }
 
-.admin-container{
+.admin-container {
 	display: inline-table;
-	width:100%;
+	width: 100%;
 }
 
+/*========BOOKING TABLE========*/
 .booking-table {
 	margin-top: 15px;
 	background-color: transparent;
@@ -133,42 +199,7 @@ h1, h2, h3, h4, span, td, p, body, ul{
 	color: #333;
 }
 
-.btn{
-	font-size: 22px;
-}
-
-.input-editable {
-	border-radius: 5px;
-	border-image: none;
-	border: none;
-	padding: 3px;
-	height: 100%;
-}
-
-.input-not-editable {
-	pointer-events: none;
-	background-color: transparent;
-	border: none;
-	height: 100%;
-	overflow: hidden;
-	resize: none;
-}
-
-input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button
-	{
-	-webkit-appearance: none;
-	margin: 0;
-}
-
-.rowColor-current {
-	background-color: rgba(255, 255, 255, 0.4);
-}
-
-.rowColor-old {
-	background-color: rgba(0, 0, 0, 0.2);
-	opacity: 0.5;
-}
-
+/*========CUSTOM ICONS========*/
 .custom-icon {
 	position: relative;
 	top: 1px;
@@ -210,6 +241,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 	height: 128px;
 }
 
+/*========PANELS FOR FLOWERS========*/
 .panel.panel-horizontal {
 	display: table;
 	width: 100%;
@@ -279,84 +311,47 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 	background-color: rgba(255, 255, 255, 0.4);
 }
 
-.panel-checked-flowers{
+.panel-checked-flowers {
 	width: 100%;
 	height: 25px;
 }
 
-.btn, .btn-primary {
-	background-color: rgba(255, 255, 255, 0.8);
-	border-color: rgba(255, 255, 255, 0.8);
-	color: rgba(0, 0, 0, 0.8);
-}
-
-.btn:hover, .btn-primary:hover {
-	background-color: rgba(255, 255, 255, 0.3);
-	border-color: rgba(255, 255, 255, 0.3);
-	color: rgba(0, 0, 0, 0.8);
-}
-
-.input-submit-header-active {
-	background-color: transparent;
-	border: none;
-	font-size: 30px;
-}
-
-.input-submit-header-inactive {
-	background-color: transparent;
-	border: none;
-	font-size: 30px;
-	opacity: 0.5;
-}
-
-/* The Modal (background) */
+/*========MODAL========*/
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
-/* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
 }
 
 #modal-description {
 	font-size: 18px;
 }
+
 /* The Close Button */
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+.close:hover, .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
 }
-
-/*input[type=text] {padding:5px; border:2px solid #ccc; 
--webkit-border-radius: 5px;
-    border-radius: 5px;
-}
-input[type=text]:focus {border-color:#333; }
-
-input[type=submit] {padding:5px 15px; background:#ccc; border:0 none;
-    cursor:pointer;
-    -webkit-border-radius: 5px;
-    border-radius: 5px; }*/
