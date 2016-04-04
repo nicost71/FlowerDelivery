@@ -29,7 +29,7 @@
 					<li>Choose from the flowers of this month presented on the homepage</li>
 					<li>Present your basic information to submit an order:
 						<ul>
-							<li>Your hone number</li>
+							<li>Your phone number</li>
 							<li>Password (for managing your booking after submission)</li>
 							<li>Your address</li>
 							<li>The recipient's name and address</li>
