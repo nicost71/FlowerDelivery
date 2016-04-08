@@ -12,14 +12,12 @@
 <body>
 	<div class="container">
 		<nav class="navbar navbar-default">
-		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="start.jsp"> <img alt="Brand" class="navbar-icon"
+				<a class="navbar-img" href="start.jsp"> <img alt="Brand" class="navbar-icon"
 					src="assets/icons/logo2_icon_64.png">
 				</a> <span class="navbar-brand">
 					Help </span>
 			</div>
-		</div>
 		</nav>
 		<h1 class="text-center">Help</h1>
 		<div class="row voffset50">

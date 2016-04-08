@@ -10,7 +10,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link type="text/css" rel="stylesheet" href="style/bootstrap.css" />
 <link type="text/css" rel="stylesheet" href="style/flowerDelivery.css" />
-<link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Josefin+Sans'
+	rel='stylesheet' type='text/css'>
 <title>New Flower Order</title>
 </head>
 <body
@@ -18,14 +19,11 @@
 	<div class="container">
 
 		<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="start.jsp"> <img alt="Brand" class="navbar-icon"
-					src="assets/icons/logo2_icon_64.png">
-				</a> <span class="navbar-brand">
-					New Order </span>
-					
-			</div>
+		<div class="navbar-header">
+			<a class="navbar-img" href="start.jsp"> <img alt="Brand"
+				class="navbar-icon" src="assets/icons/logo2_icon_64.png">
+			</a> <span class="navbar-brand"> New Order </span>
+
 		</div>
 		</nav>
 
@@ -46,12 +44,12 @@
 					<div class="form-group">
 						<label>Phone Nr:</label> <input type="text" name="userPhoneNum"
 							value="<%=request.getAttribute("userPhoneNum") != null ? request.getAttribute("userPhoneNum") : ""%>"
-							class="form-control text-center" required>
+							class="form-control text-center order-input" required>
 					</div>
 					<div class="form-group">
 						<label class="<%=status != null ? "invalid-input" : ""%>">Password:</label>
 						<input type="password" name="password"
-							class="form-control text-center" required>
+							class="form-control text-center order-input" required>
 						<%
 							if (status != null) {
 						%>
@@ -66,19 +64,19 @@
 						<label>Delivery Address:</label> <input type="text"
 							name="receiverAddr"
 							value="<%=request.getAttribute("receiverAddr") != null ? request.getAttribute("receiverAddr") : ""%>"
-							class="form-control text-center" required>
+							class="form-control text-center order-input" required>
 					</div>
 					<div class="form-group">
 						<label>Reciever Name:</label> <input type="text"
 							name="receiverName"
 							value="<%=request.getAttribute("receiverName") != null ? request.getAttribute("receiverName") : ""%>"
-							class="form-control text-center" required>
+							class="form-control text-center order-input" required>
 					</div>
 					<div class="form-group">
 						<label>Reciever Phone:</label> <input type="text"
 							name="receiverPhone"
 							value="<%=request.getAttribute("receiverPhone") != null ? request.getAttribute("receiverPhone") : ""%>"
-							class="form-control text-center" required>
+							class="form-control text-center order-input" required>
 					</div>
 
 					<div class="row">
@@ -160,7 +158,7 @@
 							</div>
 
 						</div>
-						<div class="panel-footer" style="width: 100%;">
+						<div class="panel-body-right" style="width: 100%;">
 							<h3 class="panel-title"><%=flowers.get(i).getFlowerName()%></h3>
 
 						</div>
@@ -175,7 +173,7 @@
 
 				</div>
 
-				<input type="submit" class="btn btn-primary voffset50"
+				<input type="submit" class="btn btn-primary voffset150"
 					style="font-size: 18px" value="Submit Order">
 			</form>
 
@@ -187,40 +185,38 @@
 				if (order != null) {
 		%>
 		<h2>Order successfully placed!</h2>
-				<div class="row">
+		<div class="row">
 			<div class="panel panel-primary booking-table">
 				<div class="panel-heading">
-					<h3 class="panel-title">
-						Booking
-					</h3>
+					<h3 class="panel-title">Booking</h3>
 				</div>
-		<table class="table">
-			<thead>
-				<tr class="booking-table-header">
-					<th><input type="text" class="form-control"
-						placeholder="Flowers" disabled></th>
-					<th><input type="text" class="form-control"
-						placeholder="Receiver Name" disabled></th>
-					<th><input type="text" class="form-control"
-						placeholder="Reveiver Address" disabled></th>
-					<th><input type="text" class="form-control"
-						placeholder="Receiver Phone" disabled></th>
-					<th><input type="text" class="form-control"
-						placeholder="Next Delivery Day" disabled></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="rowColor-current">
-					<td><%=order.getFlowers()%></td>
-					<td><%=order.getReceiverName()%></td>
-					<td><%=order.getReceiverAddr()%></td>
-					<td><%=order.getReceiverPhone()%></td>
-					<td><%=order.getNextDeliveryDay()%></td>
+				<table class="table">
+					<thead>
+						<tr class="booking-table-header">
+							<th><input type="text" class="form-control"
+								placeholder="Flowers" disabled></th>
+							<th><input type="text" class="form-control"
+								placeholder="Receiver Name" disabled></th>
+							<th><input type="text" class="form-control"
+								placeholder="Reveiver Address" disabled></th>
+							<th><input type="text" class="form-control"
+								placeholder="Receiver Phone" disabled></th>
+							<th><input type="text" class="form-control"
+								placeholder="Next Delivery Day" disabled></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="rowColor-current">
+							<td><%=order.getFlowers()%></td>
+							<td><%=order.getReceiverName()%></td>
+							<td><%=order.getReceiverAddr()%></td>
+							<td><%=order.getReceiverPhone()%></td>
+							<td><%=order.getNextDeliveryDay()%></td>
 
-				</tr>
-			</tbody>
-		</table>
-		</div>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<button class="btn btn-primary" onclick="window.location='start.jsp'">Back
 			to start</button>

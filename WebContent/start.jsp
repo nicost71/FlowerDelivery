@@ -52,7 +52,7 @@ function openModal(flowerName, imageLink, description){
 
 	<div class="container">
 
-		<div class="row" class="boffset50">
+		<div class="row boffset50">
 			<div class="col-sm-6 logo-container">
 				<img alt="logo" src="assets/logo2.png" style="max-width:400px">
 			</div>
@@ -66,7 +66,7 @@ function openModal(flowerName, imageLink, description){
 			</div>
 		</div>
 
-		<div class="row" class="start-container">
+		<div class="row start-container">
 			<div class="col-md-3 start-text">
 				<h2>Welcome to Flower Delivery</h2>
 				<br>
@@ -127,11 +127,11 @@ function openModal(flowerName, imageLink, description){
 				<h2 id="modal-header"></h2>
 			</div>
 			<div class="modal-body row voffset30">
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<img id="modalImage" alt="" src=""
 						style="max-width: 100%">
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-9">
 					<div id="modal-description"></div>
 				</div>
 			</div>

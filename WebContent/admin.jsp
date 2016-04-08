@@ -28,13 +28,13 @@
 			}
 		}
 		if (update) {
-			document.getElementById('edit'+index).removeAttribute("style");
+			document.getElementById('edit'+index).setAttribute("style", 'vertical-align:middle');
 			document.getElementById('confirmEdit'+index).setAttribute('style',
 					'display:none');
 		} else {
+			document.getElementById('confirmEdit'+index).setAttribute("style", 'vertical-align:middle');
 			document.getElementById('edit'+index).setAttribute('style',
 					'display:none');
-			document.getElementById('confirmEdit'+index).removeAttribute("style");
 		}
 
 	}
