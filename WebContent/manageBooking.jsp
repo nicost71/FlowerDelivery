@@ -9,7 +9,7 @@
 <link type="text/css" rel="stylesheet" href="style/bootstrap.css" />
 <link type="text/css" rel="stylesheet" href="style/flowerDelivery.css" />
 <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
-<title>Manage Booking</title>
+<title>Overview Booking</title>
 </head>
 <body>
 	<div class="container">
@@ -18,10 +18,10 @@
 				<a class="navbar-img" href="start.jsp"> <img alt="Brand" class="navbar-icon"
 					src="assets/icons/logo2_icon_64.png">
 				</a> <span class="navbar-brand">
-					Manage Booking </span>
+					Overview Bookings </span>
 			</div>
 		</nav>
-		<h2 class="text-center">Manage Booking</h2>
+		<h2 class="text-center">Overview Bookings</h2>
 		<%
 			ArrayList<Order> orders = (ArrayList<Order>) request.getAttribute("orders");
 		String status = (String) request.getAttribute("status");
@@ -44,7 +44,7 @@
 										<%
 							if (status != null && status.equals("invalidUser")) {
 						%>
-						<p class="invalid-input">User not found</p>
+						<p class="invalid-input text-center">User not found</p>
 						<%
 							}
 						%>
@@ -57,13 +57,13 @@
 															<%
 							if (status != null && status.equals("invalidPw")) {
 						%>
-						<p class="invalid-input">Invalid Password</p>
+						<p class="invalid-input text-center">Invalid Password</p>
 						<%
 							}
 						%>
 
 				<div class="text-center voffset30">
-					<input type="submit" class="btn btn-primary" value="Check Order">
+					<input type="submit" class="btn btn-primary" value="Check my Orders">
 				</div>
 
 			</form>

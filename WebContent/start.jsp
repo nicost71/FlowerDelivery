@@ -112,7 +112,7 @@ function openModal(flowerName, imageLink, description){
 			<div class="col-md-6 text-center">
 				<form action="StartServlet" method="get">
 					<input type="hidden" name="action" value="booking"> <input
-						class="btn btn-primary" type="submit" value="Manage Booking">
+						class="btn btn-primary" type="submit" value="See my Bookings">
 				</form>
 			</div>
 		</div>

@@ -40,14 +40,14 @@
 				</ul>
 			</div>
 			<div class="col-md-6">
-				<h2>Check Order</h2>
+				<h2>See active/past Bookings</h2>
 				<ul style="font-size: 18px">
-					<li>Click Manage Booking</li>
+					<li>Click on "See my Bookings"</li>
 					<li>Input your phone number and password</li>
 					<li>Have a look at your open and past bookings</li>
 				</ul>
 				<br><br>
-				<p style="font-size: 18px">Should you have any inquiries about your order, please contact our hotline: <strong>9477-0202</strong></p>
+				<p style="font-size: 18px">Should you have any inquiries about your order, please contact our hotline: <strong>Tel: (+65) 9477-0202</strong></p>
 			</div>
 
 		</div>
